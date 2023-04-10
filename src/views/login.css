@@ -1,0 +1,5 @@
+.Background{
+    background-image: url('../img/Colegio.jpg') ;
+    background-size: cover;
+    height: 100vh;
+}
