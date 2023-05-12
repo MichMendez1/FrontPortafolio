@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	background-color: #F2F2F2;
+}
+
+html {
+	font-size: 20px;
+}
+
+.cabezera {
+	height: 60px;
+	background-color: #D9B814;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+}
+
+.caja-tabla {
+	padding: 1.5rem 4rem;
+}
+
+.form-seleccion-curso {
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+select {
+	width: 600px;
+	appearance: none
+}
+
+.btn,
+select {
+	padding: .5rem;
+	background-color: #ffffff;
+	height: 2rem;
+	border: 1px solid #dbdbdbd6;
+	border-radius: 5px;
+}
+
+.btn:hover {
+	background-color: #B3C8F2;
+	box-shadow: 1px 5px 10px 2px #00000033;
+	border: 1px solid #a6bff0;
+}
+
+select:hover {
+	box-shadow: 1px 6px 10px 2px #00000008;
+}
+
+.btn:active {
+	background-color: #F2B749;
+	color: #F2F2F2;
+}
