@@ -11,6 +11,7 @@ import Sidebar from './views/SideBar/SideBar';
 import { useState } from 'react';
 import { Container, Form, Button, Table } from "react-bootstrap";
 
+import docente from './views/docente/app';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path:'/login',
     Component:Login
+  },
+  {
+    path:'/docente',
+    Component:docente
   }
   ,
   {

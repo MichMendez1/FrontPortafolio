@@ -1,0 +1,17 @@
+[
+    {
+        "nombre": "curso A",
+        "id": "a1",
+        "sala": null
+    },
+    {
+        "nombre": "curso B",
+        "id": "a2",
+        "sala": null
+    },
+    {
+        "nombre": "curso C",
+        "id": "a3",
+        "sala": null
+    }
+]
