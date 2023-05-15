@@ -3,7 +3,9 @@ import React from "react"
 import responseCursos from "./mocks/lista-cursos.json"
 import responseAlumnos from "./mocks/lista-alumnos.json"
 import Tabla from "./components/Tabla"
+import Modal from "./components/Modal"
 import { useState } from "react"
+import logo from "./img/Nuevos_Horizontes.png"
 
 
 function App() {
@@ -24,13 +26,24 @@ function App() {
 		<div className="pagina-asistencia">
 
 			<header className="cabezera">
-				<div className="nombre-docente">Docente: Nombre docente </div>
+				<img className="img-cabezera" alt="logo-colegio" src={logo}/>
 				<div className="enlaces">
-					<button onClick={()=>setTabla(!tabla)}>Notas</button>
-					<button onClick={()=>setTabla(!tabla)}>Asistencia</button>
-					<a href="#">Anotaciones</a>
+					<button 
+						onClick={()=>setTabla(!tabla)}
+						className="btn-cabezara">
+							Notas</button>
+					<button 
+						onClick={()=>setTabla(!tabla)}
+						className="btn-cabezara">
+							Asistencia</button>
+					<button 
+						disabled
+						className="btn-cabezara">
+							Anotaciones</button>
 				</div>
 			</header>
+
+			<h3 className="nombre-docente">Nombre Docente</h3>
 
 			<form className="form-seleccion-curso" onSubmit={buscarCurso}>
 				<select 
@@ -64,8 +77,15 @@ function App() {
 			<div className="caja-tabla">
 				<Tabla 
 					listaAlumnos={listaAlumnos}
-					esTablaAsistencia={tabla}>
+					esTablaAsistencia={tabla}
+					modal={estadoModal}
+					setModal={setEstadoModal}>
 				</Tabla>
+
+				<Modal
+					estado={estadoModal}
+					setEstado={setEstadoModal}>
+				</Modal>
 			</div>
 
 		</div>

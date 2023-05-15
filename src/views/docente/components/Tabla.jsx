@@ -1,5 +1,6 @@
 import "./tabla.css"
 
+
 function handleSubmit(event) {
 	event.preventDefault()
 	const datos = new FormData(event.target)
@@ -32,7 +33,7 @@ function inputNotas(alumnoId) {
 	)
 }
 
-function Columnas(listaAlumnos, esTablaAsistencia) {
+function Columnas(listaAlumnos, esTablaAsistencia, modal, setModal) {
 	return (
 		<div className="tabla">
 			<div className="caja-columnas">
@@ -47,13 +48,13 @@ function Columnas(listaAlumnos, esTablaAsistencia) {
 							{alumno.nombre}
 						</div>)}
 				</div>
-
+			
 				<div className="columna">
 					<div className="titulo">Apellido</div>
 					{listaAlumnos.map(alumno =>
 						<div
 							className="celda-contenido"
-							key={alumno.id}
+							key={alumno.id}  
 						>
 							{alumno.apellido}
 						</div>)}
@@ -76,15 +77,21 @@ function Columnas(listaAlumnos, esTablaAsistencia) {
 			</div>
 					
 			<div className="caja-btn">
-				<button className="btn btn-tabla" type="submit" form="formTabla">recoger</button>
+				<button 
+					className="btn btn-tabla" 
+					type="submit" 
+					form="formTabla"
+					onClick={() => setModal(!modal)}>
+						Aceptar
+				</button>
 			</div>		
 		</div>
 	)
 }
 
-function Tabla({ listaAlumnos, esTablaAsistencia }) {
+function Tabla({ listaAlumnos, esTablaAsistencia, modal, setModal}) {
 	return (listaAlumnos)
-		? Columnas(listaAlumnos, esTablaAsistencia)
+		? Columnas(listaAlumnos, esTablaAsistencia, modal, setModal)
 		: <span>Lista de alumnos....</span>
 }
 

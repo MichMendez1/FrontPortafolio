@@ -12,12 +12,24 @@ html {
 }
 
 .cabezera {
-	height: 60px;
-	background-color: #D9B814;
+	height: 5.5rem;
+	background-color: #213c4e;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 15px;
+	padding: 0.5rem 2.5rem;
+}
+
+.img-cabezera{
+	max-width: auto;
+	height: 100%
+}
+
+.nombre-docente {
+	color: #213c4e;
+	margin: 1rem;
+	margin-left: 1.5rem;
+	font-size: 1.3rem;
 }
 
 .caja-tabla {
@@ -41,13 +53,29 @@ select {
 select {
 	padding: .5rem;
 	background-color: #ffffff;
-	height: 2rem;
+	font-size: 0.8rem;
+	height: 2.3rem;
 	border: 1px solid #dbdbdbd6;
 	border-radius: 5px;
 }
 
+.enlaces {
+	display: flex;
+	gap: 1rem;
+}
+
+.btn-cabezara {
+	border: none;
+	color: #f2f2f2;
+	background-color: transparent;
+}
+
+.btn-cabezara:hover {
+	color: #45b0e5;
+}
+
 .btn:hover {
-	background-color: #B3C8F2;
+	background-color: #45b0e5;
 	box-shadow: 1px 5px 10px 2px #00000033;
 	border: 1px solid #a6bff0;
 }

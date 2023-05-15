@@ -9,7 +9,7 @@ export default function Modal({ estado, setEstado }) {
 	return (
 			estado &&
 				<div id='modal' className='modal '>
-					<p>Se paso la lista con exito</p>
+					<p>Se realizo la operacion con exito</p>
 					<button className='btn' onClick={ocultarModal}>Aceptar</button>
 				</div>		
 	)
