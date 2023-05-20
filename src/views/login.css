@@ -1,5 +1,52 @@
-.Background{
-    background-image: url('../img/Colegio.jpg') ;
+.login-container {
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1571801565886-4e6a5f9b4da8');
     background-size: cover;
-    height: 100vh;
-}
+    background-position: center;
+    position: relative;
+  }
+  
+  .login-container::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 90%;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .login-form-container h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    text-align: left;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-top: 20px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  

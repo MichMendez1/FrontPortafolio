@@ -1,47 +1,63 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 
-function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const Navbar = () => {
+  const handleLogout=()=>{
+    sessionStorage.removeItem('user');
+    window.location.href="/login"
 
-  const handleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  }
+  return (sessionStorage.getItem('user')  &&(
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          NH
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <NavLink to="/home" className="nav-link" activeClassName="active">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/Perfil" className="nav-link" activeClassName="active">
+                Perfil
+              </NavLink>
+            </li>
+            
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/asistenteadm">
+                    Administracion de usuarios
+                  </NavLink>
+                </li>
+              
+            <li className="nav-item">
+              <Button  style={{marginRight: "4rem"}} variant="outline-light" onClick={handleLogout}>
+                  Salir
+              </Button>
 
-  return (
-    <nav className="bg-primary text-white sidebar d-flex flex-column align-items-start">
-      <button
-        className="btn btn-link btn-sm text-white ms-2 mt-2 d-block d-md-none"
-        type="button"
-        onClick={handleCollapse}
-      >
-        <i className={`bi bi-${isCollapsed ? 'arrow-right' : 'arrow-left'} me-2`}></i>
-        {isCollapsed ? 'abrir' : 'cerrar'}
-      </button>
-      <ul className={`nav flex-column ${isCollapsed ? 'collapse' : 'show'} d-md-flex`}>
-        <li className="nav-item">
-          <Link to="/" className="nav-link text-white">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/login" className="nav-link text-white">
-            Login
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/asistenteadm" className="nav-link text-white">
-            Asistente
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/perfil" className="nav-link text-white">
-            Perfil
-          </Link>
-        </li>
-      </ul>
+            </li>
+            <li className="nav-item">
+              
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-  );
-}
+  ));
+};
 
-export default Sidebar;
+export default Navbar;
