@@ -17,6 +17,7 @@ import HomePage from './views/Home/Home';
 import { AuthProvider } from './views/AuthProvider';
 import { AuthContext } from './views/AuthProvider';
 
+import docente from './views/docente/app';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path:'/login',
     Component:Login
+  },
+  {
+    path:'/docente',
+    Component:docente
   }
   ,
   {
