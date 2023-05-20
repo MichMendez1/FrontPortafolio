@@ -5,7 +5,7 @@ function RegistrationPage() {
   const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
- 
+  const [Grade, setGrade] = useState('');
   const [Role, setRole] = useState('');
 const baseUrl="http://localhost:3001/usuarios";
 const handleLogin=()=>{
@@ -34,6 +34,7 @@ const handleLogin=()=>{
           Password: hashedPassword,
           Name,
           Role,
+          Grade,
         };
   
         const createUserResponse = await fetch(baseUrl, {
@@ -51,6 +52,7 @@ const handleLogin=()=>{
           setPassword('');
           setName('');
           setRole('');
+          setGrade('');
           window.location.href="./login"
         } else {
           throw new Error(`HTTP error! status: ${createUserResponse.status}`);
@@ -112,15 +114,36 @@ const handleLogin=()=>{
           <label htmlFor="Role" className="form-label">
             Role
           </label>
-          <input
+          <select
             type="text"
-            className="form-control"
+            className="form-select"
             id="Role"
             value={Role}
             onChange={(e) => setRole(e.target.value)}
             required
+          >
+            <option value="">Seleccionar rol</option>
+            <option value="Profesor">Profesor</option>
+            <option value="Estudiante">Estudiante</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        
+      {Role === 'Estudiante' && (
+        <div className="mb-3">
+          <label htmlFor="Grade" className="form-label">
+            Curso
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="Grade"
+            value={Grade}
+            onChange={(e) => setGrade(e.target.value)}
+            required
           />
         </div>
+      )}
         <button type="submit" className="btn btn-primary">
           Registrarse
         </button>

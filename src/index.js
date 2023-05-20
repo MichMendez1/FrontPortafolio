@@ -14,12 +14,11 @@ import Registration from './views/Registro/registrationForm';
 import LoginPage from './views/Login/Login';
 import RegistrationPage from './views/Registro/registrationForm';
 import HomePage from './views/Home/Home';
-import { AuthProvider } from './views/AuthProvider';
-import { AuthContext } from './views/AuthProvider';
 
-import docente from './views/docente/app';
+import Docente from './views/docente/app';
 
 const router = createBrowserRouter([
+  
   {
     path:'/',
     Component:App
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/docente',
-    Component:docente
+    Component:Docente
   }
   ,
   {
@@ -50,16 +49,26 @@ const router = createBrowserRouter([
     Component:HomePage
   }
 ])
+const user = JSON.parse(sessionStorage.getItem('user'));
+  const { Name, Email, Role } = user || {}
 const AppWithSidebar = () => (
+  
   <div>
     < Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/asistenteadm" element={<UserPage />} />
+      {user && user.Role === 'Admin' && (
+        <Route path="/registro" element={<RegistrationPage />} />
+      )}
+      {user && user.Role === 'Admin' && (
+        <Route path="/asistenteadm" element={<UserPage />} />
+      )}
+      
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/registro" element={<RegistrationPage />} />
+      
       <Route path="/home" element={<HomePage />} />
+      <Route path="/docente" element={<Docente />} />
     </Routes>
   </div>
 );
