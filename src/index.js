@@ -10,11 +10,9 @@ import Perfil from './views/Perfil/Perfil';
 import Navbar from './views/SideBar/SideBar';
 import { useState } from 'react';
 import { Container, Form, Button, Table } from "react-bootstrap";
-import Registration from './views/Registro/registrationForm';
-import LoginPage from './views/Login/Login';
 import RegistrationPage from './views/Registro/registrationForm';
 import HomePage from './views/Home/Home';
-
+import Estudiante from './views/estudiante/estudiante'
 import Docente from './views/docente/app';
 
 const router = createBrowserRouter([
@@ -47,6 +45,10 @@ const router = createBrowserRouter([
   {
     path:'/home',
     Component:HomePage
+  },
+  {
+    path:'/estudiante',
+    Component: Estudiante
   }
 ])
 const user = JSON.parse(sessionStorage.getItem('user'));
@@ -69,6 +71,7 @@ const AppWithSidebar = () => (
       
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
+      <Route path="/estudiante" element={<Estudiante />} />
     </Routes>
   </div>
 );
