@@ -1,0 +1,5 @@
+.Background{
+    background-image: url('/FrontPortafolio/src/img/Colegio.jpg') ;
+    background-size: cover;
+    height: 100vh;
+}
