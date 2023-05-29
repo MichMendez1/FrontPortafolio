@@ -3,7 +3,7 @@ import ProfileImage from "../../img/profile-pic.png";
 
 const Perfil = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
-  const { Name, Email, Role } = user || {}
+  const { Nombre, Apellido_Paterno, Apellido_Materno, Correo, Direccion, Tipo } = user || {}
 
   return (
     <div className="container-fluid px-0">
@@ -20,8 +20,8 @@ const Perfil = () => {
                       className="rounded-circle img-fluid"
                       style={{ width: "150px" }}
                     />
-                    <h3 className="mt-2 mb-0">  {Name}</h3>
-                    <p className="text-muted mb-2">{Role}</p>
+                    <h3 className="mt-2 mb-0">  {Nombre} {Apellido_Paterno} {Apellido_Materno}</h3>
+                    <p className="text-muted mb-2">{Tipo}</p>
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -40,14 +40,15 @@ const Perfil = () => {
                       <p className="mb-3">
                         <strong>Email:</strong>{" "}
                         <a href="mailto:john.doe@example.com">
-                          {Email}
+                          {Correo}
                         </a>
                       </p>
                       <p className="mb-3">
                         <strong>Celular:</strong> +569 45667890
                       </p>
                       <p className="mb-3">
-                        <strong>Direccion:</strong> Mi casita
+                        <strong>Direccion:</strong> 
+                        <a> {Direccion} </a>
                       </p>
                     </div>
                   </div>

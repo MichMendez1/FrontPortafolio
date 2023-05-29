@@ -9,12 +9,10 @@ const Login = () => {
     }
 
     const [datos, setDatos] = useState({
-        Email: '',
-        Password: ''
+        Correo: '',
+        Contraseña: ''
     })
-    const baseUrl="http://localhost:3001/usuarios";
-
-    const url = 'http://localhost:3000/';
+    const baseUrl="http://localhost:3001/estudiantes";
 
     const handleInputChange = (e) => {
         setDatos({
@@ -25,13 +23,13 @@ const Login = () => {
  
     const handleLogin = async () => {
         try {
-          const response = await fetch(`${baseUrl}?Email=${datos.Email}`);
+          const response = await fetch(`${baseUrl}?Correo=${datos.Correo}`);
           if (response.ok) {
             const users = await response.json();
       
             if (users.length > 0) {
               const user = users[0];
-              const isPasswordMatch = await bcrypt.compare(datos.Password, user.Password);
+              const isPasswordMatch = await bcrypt.compare(datos.Contraseña, user.Contraseña);
       
               if (isPasswordMatch) {
                 // Passwords match, user is authenticated
@@ -67,13 +65,13 @@ const Login = () => {
                     <div className="mb-3 row">
                         <label htmlFor="inputEmail" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" onChange={handleInputChange} name='Email' id="inputEmail" />
+                            <input type="email" className="form-control" onChange={handleInputChange} name='Correo' id="inputCorreo" />
                         </div>
                     </div>
                     <div className="mb-3 row">
                         <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
-                            <input type="password" name="Password" onChange={handleInputChange} className="form-control" id="inputPassword" />
+                            <input type="password" name="Contraseña" onChange={handleInputChange} className="form-control" id="inputContraseña" />
                         </div>
                     </div>
                 </div>

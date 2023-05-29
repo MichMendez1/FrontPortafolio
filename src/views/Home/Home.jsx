@@ -1,28 +1,64 @@
-import React from 'react';
-
+import React from "react";
+import "./HomePage.css"; // Archivo de estilos CSS para la página de inicio
+import "bootstrap/dist/css/bootstrap.min.css"; // Importar Bootstrap CSS
+import { Link, NavLink } from "react-router-dom";
+import img4 from '../../img/libro.png'
+import img2 from '../../img/colores.png'
+import img1 from '../../img/cerebro.png'
+import img3 from '../../img/estudio.png'
 const HomePage = () => {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    const { Name, Email, Role } = user || {}
   return (
-    <div className="container">
-      <h1 className="mt-5">¡Bienvenido, {Name}!</h1>
-      <p className="my-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo, felis eu congue
-        aliquet, dolor velit tristique nulla, id efficitur sapien felis at lorem. Quisque iaculis
-        turpis nec mi lobortis, id commodo nulla lobortis. Vestibulum dapibus mauris nec nulla
-        commodo, id efficitur felis dignissim. Sed vel pulvinar sem, non pellentesque ipsum.
-      </p>
-      <p className="my-4">
-        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-        Suspendisse sollicitudin ligula non velit ultrices faucibus. Sed condimentum sem et tellus
-        rhoncus, id tempor risus lobortis. Quisque sed finibus enim. Integer a felis sapien.
-      </p>
-      <p className="my-4">
-        Sed in velit ac nisi pharetra egestas eu eget felis. Aliquam ac lectus at justo euismod
-        scelerisque. Fusce at feugiat tortor. Nunc auctor ullamcorper varius. Nulla facilisi. Sed
-        fermentum quam at tortor ultrices, vitae cursus nisi interdum. Sed sed augue non urna
-        porttitor mollis. Aenean dignissim libero in mi rhoncus, a feugiat ligula viverra.
-      </p>
+    <div className="homepage">
+      <div className="banner">
+        <h1>Admisión 2024</h1>
+        <h3>
+          Descubre los beneficios de nuestra escuela privada: Formando mentes
+          brillantes para un futuro exitoso
+        </h3>
+        <div className="postular">
+          <button>Postula aquí</button>
+        </div>
+      </div>
+      <div className="two-boxes-section">
+        <div className="box">
+          <h2>Descubre el nuevo concepto de educación</h2>
+          <p>Formando mentes brillantes para un futuro exitoso</p>
+        </div>
+        <div className="box2">
+          <p>
+            Bienvenidos a nuestra escuela privada, un lugar donde la excelencia
+            académica y el desarrollo integral de nuestros estudiantes son
+            nuestra prioridad. Nuestra institución se destaca por ofrecer una
+            educación de calidad, basada en valores sólidos y un enfoque
+            innovador. En nuestra escuela, brindamos una experiencia educativa
+            enriquecedora que prepara a nuestros estudiantes para enfrentar los
+            desafíos del siglo XXI y convertirse en líderes destacados en sus
+            respectivas áreas.
+          </p>
+        </div>
+      </div>
+      <div className="four-paragraphs-section">
+        <div className="paragraph">
+          <img src={img1} alt="Imagen 1" />
+          <h2>Enseñanza</h2>
+          <p>Nuestro enfoque pedagógico se basa en un riguroso plan de estudios que combina los fundamentos académicos con la aplicación práctica del conocimiento. </p>
+        </div>
+        <div className="paragraph">
+          <img src={img2} alt="Imagen 2" />
+          <h2>Innovación</h2>
+          <p>En nuestra escuela, creemos en la importancia de estar a la vanguardia de la educación. Por eso, integramos la tecnología de manera efectiva en nuestras aulas.</p>
+        </div>
+        <div className="paragraph">
+          <img src={img3} alt="Imagen 3" />
+          <h2>Estudiantes</h2>
+          <p>Nuestros estudiantes son el corazón de nuestra escuela. Nos enorgullece crear un ambiente inclusivo y de apoyo donde cada individuo se sienta valorado y respetado. </p>
+        </div>
+        <div className="paragraph">
+          <img src={img4} alt="Imagen 4" />
+          <h2>Recursos</h2>
+          <p>En nuestra escuela, contamos con recursos excepcionales que enriquecen la experiencia educativa de nuestros estudiantes.</p>
+        </div>
+      </div>
     </div>
   );
 };
