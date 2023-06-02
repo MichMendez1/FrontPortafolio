@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Asistencia = () => {
+const PerfilSt = () => {
   return (
     <div>
-      Home
+      Holi
     </div>
   )
 }
 
-export default Asistencia
+export default PerfilSt
