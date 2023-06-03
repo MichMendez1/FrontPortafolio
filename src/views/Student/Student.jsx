@@ -15,6 +15,7 @@ const Student = () => {
         <div className="widgets">
           <Widget/>
           <Widget/>
+          <Widget/>
         </div>
 
       </div>

@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import "./sidebar.scss";
 import logo from "./Nuevos Horizontes.png";
 import HomeIcon from '@mui/icons-material/Home';
@@ -10,29 +13,37 @@ const Sidebar = () => {
   return (
     <div className='sidebar'>
       <div className="top">
-        <img className="logo" src={logo}></img>
+        <img className="logo" src={logo} alt="Logo"></img>
       </div>
 
       <div className="center">
         <ul>
           <li>
-            <HomeIcon className="icon"/>
-            <span>Home</span>
+            <Link to="/student" className='link'>
+              <HomeIcon className="icon" />
+              <span>Home</span>
+            </Link>
           </li>
           <li>
-            <LocalLibraryOutlinedIcon className="icon"/>
-            <span>Asistencia</span>
+            <Link to="/student/asistencia" className='link'>
+              <LocalLibraryOutlinedIcon className="icon" />
+              <span>Asistencia</span>
+            </Link>
           </li>
           <li>
-            <EditNoteIcon className="icon"/>
-            <span>Anotaciones</span>
+            <Link to="/student/anotaciones" className='link'>
+              <EditNoteIcon className="icon" />
+              <span>Anotaciones</span>
+            </Link>
           </li>
           <li>
-            <SchoolOutlinedIcon className="icon"/>
-            <span>Notas</span>
+            <Link to="/student/notas" className='link'>
+              <SchoolOutlinedIcon className="icon" />
+              <span>Notas</span>
+            </Link>
           </li>
           <li>
-            <ExitToAppIcon className="icon"/>
+            <ExitToAppIcon className="icon" />
             <span>Cerrar Sesión</span>
           </li>
         </ul>
@@ -41,4 +52,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default Sidebar;

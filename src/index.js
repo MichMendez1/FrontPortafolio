@@ -13,8 +13,9 @@ import HomePage from './views/Home/Home';
 import Docente from './views/docente/app';
 import Student from './views/Student/Student';
 import 'bootstrap/scss/bootstrap.scss'
-import PerfilEst from './views/Student/pages/PerfilSt';
+import Asistencia from "./views/Student/pages/Asistencia"
 import Notas from './views/Student/pages/Notas';
+import Anotaciones from './views/Student/pages/Anotaciones';
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
@@ -38,8 +39,9 @@ const AppWithSidebar = () => (
       <Route path="/docente" element={<Docente />} />
       <Route path="student">
             <Route index element={<Student/>} />
-            <Route path=":studentId" element={<PerfilEst/>}/>
+            <Route path= '/student/asistencia' element={<Asistencia/>}/>
             <Route path='/student/notas' element={<Notas/>} />
+            <Route path='/student/anotaciones' element={<Anotaciones/>} />
       </Route>
     </Routes>
   </div>
