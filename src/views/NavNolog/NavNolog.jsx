@@ -1,7 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import logoImage from '../../img/Nuevos Horizontes.png';
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+import logoImage from "../../img/Nuevos Horizontes.png";
+import "./navbar.css";
 function NavNolog() {
   return (
     <div>
@@ -30,11 +30,7 @@ function NavNolog() {
               </li>
 
               <li className="nav-item">
-                <NavLink
-                  to="/home"
-                  className="nav-link"
-                  activeClassName="active"
-                >
+                <NavLink to="/" className="nav-link" activeClassName="active">
                   Inicio
                 </NavLink>
               </li>
@@ -59,13 +55,17 @@ function NavNolog() {
                 </NavLink>
               </li>
 
-              <li className="nav-item"></li>
+              <li className="login">
+                <NavLink className="nav-link" to="/login">
+                  Ingresar
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
-  )
+  );
 }
 
-export default NavNolog
+export default NavNolog;

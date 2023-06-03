@@ -16,20 +16,20 @@ import HomePage from './views/Home/Home';
 
 import Docente from './views/docente/app';
 import RegistroEstudiante from './views/Registro/RegistroEstudiante';
-import crudEstudiantes from './views/Asistente/AdministracionEstudiantes';
 import CrudEstudiantes from './views/Asistente/AdministracionEstudiantes';
 import CrudApoderados from './views/Asistente/AdministracionApoderados';
 import AboutPage from './views/About/sobreNosotros';
 import NavNolog from './views/NavNolog/NavNolog';
 import CrudProfesores from './views/Asistente/AdministracionProfesores';
 import ProfesoresPage from './views/NuestroEquipo/NuestroEquipo';
+import Horarios from './views/Horario/horario';
 
 
 const router = createBrowserRouter([
   
   {
     path:'/',
-    Component:App
+    Component:HomePage
   },
   {
     path:'/login',
@@ -63,6 +63,10 @@ const router = createBrowserRouter([
   {
     path:'/nosotros',
     Component:AboutPage
+  },
+  {
+    path:'/horarios',
+    Component:Horarios
   }
 ])
 const user = JSON.parse(sessionStorage.getItem('user'));
@@ -74,17 +78,17 @@ const AppWithSidebar = () => (
     {isLoggedIn ? <Navbar /> : <NavNolog />}
 
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<RegistroEstudiante />} />
       <Route path="/admEstudiantes" element={<CrudEstudiantes />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/admApoderados" element={<CrudApoderados />} />
       <Route path="/nosotros" element={<AboutPage />} />
       <Route path="/Equipo" element={<ProfesoresPage />} />
       <Route path="/admProfesores" element={<CrudProfesores />} />
+      <Route path="/horarios" element={<Horarios />} />
     </Routes>
   </div>
 );

@@ -82,7 +82,7 @@ const handleLogin=()=>{
 
   return (
     <div className="container mt-5">
-      <h2>Registration</h2>
+      <h2>Registro Estudiante</h2>
       <form onSubmit={handleRegistration}>
         <div className="mb-3">
           <label htmlFor="CursoID" className="form-label">
