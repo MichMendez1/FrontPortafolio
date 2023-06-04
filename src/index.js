@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import Login from './views/login';
+import {createBrowserRouter,RouterProvider} from 'react-router-dom';
+import Login from './views/login/login';
+import Director from './views/director/director';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path:'/login',
     Component:Login
+  },
+  {
+    path:'/director',
+    Component:Director
   }
 ])
 
