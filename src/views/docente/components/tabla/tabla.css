@@ -2,7 +2,7 @@
 	display: flex;
 }
 
-.titulo{
+.celda-titulo{
 	background-color: #213c4e;
 	color: #f2f2f2;
 	font-size: 18px;
@@ -14,6 +14,7 @@
 .caja-columnas{
 	border: 1px solid rgba(6, 6, 6, 0.731);
 	display: flex;
+	background-color: aqua;
 }
 
 .columna{
@@ -22,12 +23,22 @@
 	flex-grow: 2;	
 }
 
+.columnaContador{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
 .celda-contenido{
 	background-color: #ffffff;
 	font-size: 16px;
 	border: 1px solid rgba(6, 6, 6, 0.171);
 	padding: 0.6rem;
 	flex-grow: 1;
+}
+
+.columnaAnotaciones{
+	/* width: 20%; */
 }
 
 .celda-form{
