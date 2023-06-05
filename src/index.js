@@ -14,8 +14,17 @@ import Registration from './views/Registro/registrationForm';
 import LoginPage from './views/Login/Login';
 import RegistrationPage from './views/Registro/registrationForm';
 import HomePage from './views/Home/Home';
-
 import Docente from './views/docente/app';
+import Administrador from './views/Administrador/App';
+import Homeadmin from './views/Administrador/Pages/HomeAD/Homeadmin';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './views/Administrador/Pages/Register/Register';
+import RegisterAsistente from './views/Administrador/Pages/Register/RegisterAsistente';
+//import Headers from './views/Administrador/Components/Headers/Headers';
+// import Edit from './views/Administrador/Pages/Edit/Edit';
+// import Profile from './views/Administrador/Pages/Profile/Profile';
+// import Header from './views/Administrador/components/Headers/Headers';
+
 
 const router = createBrowserRouter([
   
@@ -30,8 +39,7 @@ const router = createBrowserRouter([
   {
     path:'/docente',
     Component:Docente
-  }
-  ,
+  },
   {
     path:'/asistenteadm',
     Component:UserPage
@@ -47,7 +55,38 @@ const router = createBrowserRouter([
   {
     path:'/home',
     Component:HomePage
-  }
+  },
+
+   {
+     path:'/administrador',
+     Component:Administrador
+   },
+    {
+     path:'/homeadmin',
+     Component:Homeadmin
+    },
+  {
+    path:'/register',
+    Component:Register
+  },
+  {
+    path:'/registerasistente',
+    Component:RegisterAsistente
+  },
+  // {
+  //   path:'/edit',
+  //   Component:Edit
+  // },
+  // {
+  //   path:'/profile',
+  //   Component:Profile
+  // },
+  // {
+  //    path:'/headers',
+  //    Component:Headers
+  //  },
+
+
 ])
 const user = JSON.parse(sessionStorage.getItem('user'));
   const { Name, Email, Role } = user || {}
@@ -66,9 +105,20 @@ const AppWithSidebar = () => (
       )}
       
       <Route path="/perfil" element={<Perfil />} />
-      
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
+
+      <Route path="/administrador" element={<Administrador />} />
+      <Route path="/homeadmin" element={<Homeadmin />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/registerasistente" element={<RegisterAsistente />} />
+      {/* <Route path="/headers" element={<Headers />} /> */}
+      {/* <Route path="/homeadmin" element={<Homeadmin />} />
+      <Route path="/register" element={<Register />} />
+      
+      <Route path="/edit/:id" element={<Edit />} />
+      <Route path="/userprofile/:id" element={<Profile/>} /> */}
+
     </Routes>
   </div>
 );
