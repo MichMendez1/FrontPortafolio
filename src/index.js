@@ -1,60 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './index.css';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
-import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Login from './views/login';
 import UserPage from './views/Asistente/Asistente';
 import Perfil from './views/Perfil/Perfil';
 import Navbar from './views/SideBar/SideBar';
 import { useState } from 'react';
-import { Container, Form, Button, Table } from "react-bootstrap";
-import Registration from './views/Registro/registrationForm';
-import LoginPage from './views/Login/Login';
+import { Container, Form, Button, Table } from 'react-bootstrap';
 import RegistrationPage from './views/Registro/registrationForm';
 import HomePage from './views/Home/Home';
-
 import Docente from './views/docente/app';
+import Student from './views/Student/Student';
+import 'bootstrap/scss/bootstrap.scss'
+import Asistencia from "./views/Student/pages/Asistencia"
+import Notas from './views/Student/pages/Notas';
+import Anotaciones from './views/Student/pages/Anotaciones';
 
-const router = createBrowserRouter([
-  
-  {
-    path:'/',
-    Component:App
-  },
-  {
-    path:'/login',
-    Component:Login
-  },
-  {
-    path:'/docente',
-    Component:Docente
-  }
-  ,
-  {
-    path:'/asistenteadm',
-    Component:UserPage
-  },
-  {
-    path:'/perfil',
-    Component:Perfil
-  },
-  {
-    path:'/registro',
-    Component:RegistrationPage
-  },
-  {
-    path:'/home',
-    Component:HomePage
-  }
-])
+
 const user = JSON.parse(sessionStorage.getItem('user'));
-  const { Name, Email, Role } = user || {}
+const { Name, Email, Role } = user || {};
+
 const AppWithSidebar = () => (
-  
   <div>
-    < Navbar />
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
@@ -64,23 +33,23 @@ const AppWithSidebar = () => (
       {user && user.Role === 'Admin' && (
         <Route path="/asistenteadm" element={<UserPage />} />
       )}
-      
+
       <Route path="/perfil" element={<Perfil />} />
-      
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
+      <Route path="student">
+            <Route index element={<Student/>} />
+            <Route path= '/student/asistencia' element={<Asistencia/>}/>
+            <Route path='/student/notas' element={<Notas/>} />
+            <Route path='/student/anotaciones' element={<Anotaciones/>} />
+      </Route>
     </Routes>
   </div>
 );
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <Router>
     <AppWithSidebar />
   </Router>,
+  document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();
