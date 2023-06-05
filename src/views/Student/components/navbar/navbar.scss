@@ -1,0 +1,33 @@
+.navbar {
+    height: 60px;
+    border-bottom: 0.5px  rgb(10, 3, 3);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: black;
+    background-color: white;
+     width: 120%;
+
+    .wrapper {
+        flex: 0.75;
+        padding: 10px;
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+         
+        .items {
+            display: flex;
+            align-items: center;
+
+            .item{
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+
+            }
+
+        }
+
+       
+    }
+}
