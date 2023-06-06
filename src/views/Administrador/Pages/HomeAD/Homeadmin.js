@@ -8,8 +8,9 @@ import Tables from '../../components/Tables/Tables';
 import Spiner from "../../components/Spiner/Spiner";
 import { useNavigate } from 'react-router-dom';
 import "./home.css";
+import Headers from '../../components/Headers/Headers';
 // import { FormCheck } from 'react-bootstrap';
-  
+
 function Homeadmin() {
 
   const [showspin, setShowSpin] = useState(true)
@@ -17,11 +18,11 @@ function Homeadmin() {
   const navigate = useNavigate();
 
   const adduser = () => {
-    navigate("/register")
+    navigate("/registerworker")
   }
 
-  const addusers = () => {
-    navigate("/registerasistente")
+  const addassistant = () => {
+    navigate("/registerassistant")
   }
 
   useEffect(() => {
@@ -32,6 +33,9 @@ function Homeadmin() {
 
   return (
     <>
+      <div>
+      <Headers />
+      </div>
       <div className='container'>
         <div className='main_div'>
           {/* search add btn */}
@@ -52,10 +56,10 @@ function Homeadmin() {
             </div>
           </div>
 
-        
+
           <div className='add_btn'>
-              <Button variant="primary" onClick={addusers}><FontAwesomeIcon icon={faPlus} />&nbsp;Agregar Trabajador</Button>
-            </div>
+            <Button variant="primary" onClick={addassistant}><FontAwesomeIcon icon={faPlus} />&nbsp;Agregar Asistente</Button>
+          </div>
 
           {/* export,colegio trabaja*/}
           <div className='filter_div mt-5 d-flex justify-content-between flex-wrap'>

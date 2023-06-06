@@ -1,13 +1,13 @@
 import "./tabla.css"
 
 
-function handleSubmit(event) {
+const handleSubmit = (event) =>{
 	event.preventDefault()
 	const datos = new FormData(event.target)
 	console.log(datos)
 }
 
-function inputAsistencia(alumnoId) {
+const inputAsistencia = (alumnoId) =>{
 	return (
 		<>
 			<div className="caja-input">
@@ -23,7 +23,7 @@ function inputAsistencia(alumnoId) {
 	)
 }
 
-function inputNotas(alumnoId) {
+const inputNotas = (alumnoId) =>{
 	return (
 		<>
 		<label><input className="input-nota" type="number" name={alumnoId} /> Nota 1 </label>
@@ -33,7 +33,7 @@ function inputNotas(alumnoId) {
 	)
 }
 
-function Columnas(listaAlumnos, esTablaAsistencia, modal, setModal) {
+const Columnas = (listaAlumnos, esTablaAsistencia, modal, setModal) => {
 	return (
 		<div className="tabla">
 			<div className="caja-columnas">
@@ -89,7 +89,7 @@ function Columnas(listaAlumnos, esTablaAsistencia, modal, setModal) {
 	)
 }
 
-function Tabla({ listaAlumnos, esTablaAsistencia, modal, setModal}) {
+const Tabla = ({ listaAlumnos, esTablaAsistencia, modal, setModal}) => {
 	return (listaAlumnos)
 		? Columnas(listaAlumnos, esTablaAsistencia, modal, setModal)
 		: <span>Lista de alumnos....</span>

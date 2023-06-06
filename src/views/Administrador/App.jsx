@@ -2,11 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Headers/Headers";
 import Homeadmin from "./Pages/HomeAD/Homeadmin";
-import Register from "./Pages/Register/Register";
-import Edit from "./Pages/Edit/Edit";
+import RegisterWorker from "./Pages/Register/RegisterWorker";
+import EditWorker from "./Pages/Edit/EditWorker";
 import Tables from "./components/Tables/Tables";
 import Profile from "./Pages/Profile/Profile";
-import RegisterColegio from './Pages/Register/RegisterColegio';
+import RegisterSchool from './Pages/Register/RegisterSchool';
 
 
 
@@ -14,9 +14,9 @@ function App () {
   return (
     <>
     <Header/>
-    <Register/> 
-    <RegisterColegio/>
-    <Edit/> 
+    <RegisterWorker/> 
+    <RegisterSchool/>
+    <EditWorker/> 
     <Profile/>
     <Homeadmin/>
 

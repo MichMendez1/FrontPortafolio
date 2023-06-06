@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./edit.css"
 
   
-function Edit() {
+function EditSchool() {
 
   const [inputdata, setInputData] = useState({
-    nombre: "",
-    direccion: "",
-    telefono: "",
+    name: "",
+    address: "",
+    mobile: "",
     email: "",
   });
 
@@ -48,15 +48,15 @@ function Edit() {
   const submitUserData = (e) => {
     e.preventDefault();
 
-    const { nombre , direccion, telefono, email } = inputdata;
+    const { name , address, mobile, email } = inputdata;
 
-    if (nombre === "") {
+    if (name === "") {
       toast.error("Nombres es requerido!")
-    } else if (direccion === "") {
+    } else if (address === "") {
       toast.error("Direccion es Requerido!")
-    } else if (telefono === "") {
+    } else if (mobile === "") {
       toast.error("telefono es Requerido!")
-    } else if (telefono.length > 9) {
+    } else if (mobile.length > 9) {
       toast.error("Número invalido!")
     } else if (email === "") {
       toast.error("Corro es Requerido!")
@@ -81,15 +81,15 @@ function Edit() {
             <Row>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Nombre</Form.Label>
-                <Form.Control type="text" name='nombre' value={inputdata.nombres} onChange={setInputValue} placeholder='Nombre' />
+                <Form.Control type="text" name='name' value={inputdata.nombres} onChange={setInputValue} placeholder='Nombre' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Direccion</Form.Label>
-                <Form.Control type="text" name='direccion' value={inputdata.direccion} onChange={setInputValue} placeholder='Ingrese su Direccion' />
+                <Form.Control type="text" name='address' value={inputdata.direccion} onChange={setInputValue} placeholder='Ingrese Direccion' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Telefono</Form.Label>
-                <Form.Control type="text" name='telefono' value={inputdata.telefono} onChange={setInputValue} placeholder='Número Telefonico' />
+                <Form.Control type="text" name='mobile' value={inputdata.telefono} onChange={setInputValue} placeholder='Número Telefonico' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Correo</Form.Label>
@@ -109,4 +109,4 @@ function Edit() {
   )
 }
 
-export default Edit
+export default EditSchool

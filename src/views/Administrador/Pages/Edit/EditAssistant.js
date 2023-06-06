@@ -7,36 +7,37 @@ import Select from 'react-select';
 import Spiner from "../../components/Spiner/Spiner";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import "./register.css"
+import "./edit.css"
 
 
-function Register() {
-
-
+function Editassistant() {
 
   const [inputdata, setInputData] = useState({
-    nombres: "",
-    apellidop: "",
-    apellidom: "",
+    name: "",
+    lastname: "",
+    secondlastname: "",
     rut: "",
-    trabajo: "",
-    horas: "",
-    sueldo: "",
-    direccion: "",
-    telefono: "",
+    work: "",
+    hours: "",
+    salary: "",
+    address: "",
+    mobile: "",
     email: "",
+    user: "",
+    password: "",
   });
 
   const [status, setStatus] = useState("Active");
-  const [showspin, setShowSpin] = useState(true);
   //const [image,setImage] = useState("");
   //const [preview,setPreview] = useState("");
 
+  const [showspin, setShowSpin] = useState(true)
+
   //status optios (Cuanta con 3 colegios)
   const options = [
-    { value: 'Colegio_A', label: 'Colegio_A' },
-    { value: 'Colegio_B', label: 'Colegio_B' },
-    { value: 'Colegio_C', label: 'Colegio_C' },
+    { value: 'Nuevos Horizontes A', label: 'Nuevos Horizontes A' },
+    { value: 'Nuevos Horizontes B', label: 'Nuevos Horizontes B' },
+    { value: 'Nuevos Horizontes C', label: 'Nuevos Horizontes C' },
   ];
 
   //setInput Value
@@ -59,28 +60,28 @@ function Register() {
   const submitUserData = (e) => {
     e.preventDefault();
 
-    const { nombres, apellidop, apellidom, rut, trabajo, horas,
-      sueldo, direccion, telefono, email } = inputdata;
+    const { name, lastname, secondlastname, rut, work, hours,
+      salary, address, mobile, email, user, password } = inputdata;
 
-    if (nombres === "") {
+    if (name === "") {
       toast.error("Nombres es requerido!")
-    } else if (apellidop === "") {
+    } else if (lastname === "") {
       toast.error("Apellido Paterno es Requerido!")
-    // } else if (apellidom === "") {
-    //   toast.error("Apellido Materno es Requerido!")
+      // } else if (secondlastname === "") {
+      //   toast.error("Apellido Materno es Requerido!")
     } else if (rut === "") {
       toast.error("Rut es Requerido!")
-    } else if (trabajo === "") {
+    } else if (work === "") {
       toast.error("Trabajo es Requerido!")
-    } else if (horas === "") {
+    } else if (hours === "") {
       toast.error("Horas es Requerido!")
-    } else if (sueldo === "") {
+    } else if (salary === "") {
       toast.error("Sueldo es Requerido!")
-    } else if (direccion === "") {
+    } else if (address === "") {
       toast.error("Direccion es Requerido!")
-    } else if (telefono === "") {
+    } else if (mobile === "") {
       toast.error("telefono es Requerido!")
-    } else if (telefono.length > 9) {
+    } else if (mobile.length > 9) {
       toast.error("Número invalido!")
     } else if (email === "") {
       toast.error("Corro es Requerido!")
@@ -88,24 +89,20 @@ function Register() {
       toast.error("Ingrese un correo valido!")
     } else if (status === "") {
       toast.error("Elija colegio!")
+    } else if (user === "") {
+      toast.error("Ingrese un Usuario")
+    } else if (password === "") {
+      toast.error("Ingrese una contraseña!")
     } else {
       toast.success("El trabajador a sido ingresado!")
     }
 
   }
-
-  // useEffect(()=>{
-  //   if(image){
-  //     setPreview(URL.createObjectURL(image))
-  //   }
-  // },[image])
-
-
   return (
     <>
-    
+
       <div className='container'>
-        <h2 className='text-center mt-1'>Registrar Trabajador</h2>
+        <h2 className='text-center mt-1'>Actualizar Asistente</h2>
         <Card className='shadow mt-3 p-3'>
           <div className="profile_div text-center">
             {/* <img src={preview ? preview : "/logo.png"} alt="img" /> */}
@@ -115,15 +112,15 @@ function Register() {
             <Row>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Nombres</Form.Label>
-                <Form.Control type="text" name='nombres' value={inputdata.nombres} onChange={setInputValue} placeholder='Nombres' />
+                <Form.Control type="text" name='name' value={inputdata.nombres} onChange={setInputValue} placeholder='Nombres' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Apellido Paterno</Form.Label>
-                <Form.Control type="text" name='apellidop' value={inputdata.apellidop} onChange={setInputValue} placeholder='Primer Apellido' />
+                <Form.Control type="text" name='lastname' value={inputdata.apellidop} onChange={setInputValue} placeholder='Primer Apellido' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Apellido Materno</Form.Label>
-                <Form.Control type="text" name='appelidom' value={inputdata.apellidom} onChange={setInputValue} placeholder='Segundo Apellido' />
+                <Form.Control type="text" name='secondlastname' value={inputdata.apellidom} onChange={setInputValue} placeholder='Segundo Apellido' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Rut</Form.Label>
@@ -131,23 +128,23 @@ function Register() {
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Trabajo</Form.Label>
-                <Form.Control type="text" name='trabajo' value={inputdata.trabajo} onChange={setInputValue} placeholder='Trabajo' />
+                <Form.Control type="text" name='work' value={inputdata.trabajo} onChange={setInputValue} placeholder='Trabajo' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Horas Contrato</Form.Label>
-                <Form.Control type="number" name='horas' value={inputdata.horas} onChange={setInputValue} placeholder='Horas' />
+                <Form.Control type="number" name='hours' value={inputdata.horas} onChange={setInputValue} placeholder='Horas' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Sueldo</Form.Label>
-                <Form.Control type="text" name='sueldo' value={inputdata.sueldo} onChange={setInputValue} placeholder='Sueldo' />
+                <Form.Control type="text" name='salary' value={inputdata.sueldo} onChange={setInputValue} placeholder='Sueldo' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Direccion</Form.Label>
-                <Form.Control type="text" name='direccion' value={inputdata.direccion} onChange={setInputValue} placeholder='Ingrese su Direccion' />
+                <Form.Control type="text" name='address' value={inputdata.direccion} onChange={setInputValue} placeholder='Ingrese su Direccion' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Telefono</Form.Label>
-                <Form.Control type="text" name='telefono' value={inputdata.telefono} onChange={setInputValue} placeholder='Número Telefonico' />
+                <Form.Control type="text" name='mobile' value={inputdata.telefono} onChange={setInputValue} placeholder='Número Telefonico' />
               </Form.Group>
               <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
                 <Form.Label>Correo</Form.Label>
@@ -157,9 +154,17 @@ function Register() {
                 <Form.Label>Codigo Colegio Contratado</Form.Label>
                 <Select options={options} value={status} onChange={setStatusValue} />
               </Form.Group>
+              <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                <Form.Label>Usuario</Form.Label>
+                <Form.Control type="text" name='user' value={inputdata.usuario} onChange={setInputValue} placeholder='Usuario' />
+              </Form.Group>
+              <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control type="text" name='password' value={inputdata.contraseña} onChange={setInputValue} placeholder='Contraseña' />
+              </Form.Group>
 
               <Button variant="primary" type="submit" onClick={submitUserData}>
-                Registrar
+                Actualizar Asistente
               </Button>
             </Row>
 
@@ -171,4 +176,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Editassistant
