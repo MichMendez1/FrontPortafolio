@@ -1,0 +1,119 @@
+.homepage {
+
+    /* Estilos para la página de inicio en general */
+    padding-bottom: 20%;
+  }
+  
+  .navbar {
+    /* Estilos para la barra de navegación */
+  }
+  
+  .banner {
+    padding-top: 13%;
+    padding-bottom: 15%;
+    /* Estilos para el banner principal */
+    background-image: url("../../img/school1.jpg");
+    background-size: cover;
+    background-position: relative;
+
+
+  }
+  
+  .banner h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    display: flex;
+  align-items: center;
+  align-content: center;
+  padding-left: 35%;
+  padding-right: 35%;
+   padding-top: 5%;
+    /* Otros estilos para el h1 dentro del contenedor "banner" */
+  }
+  .banner h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+   padding-left: 25%;
+   padding-right: 25%;
+   text-align: center;
+
+    /* Otros estilos para el h1 dentro del contenedor "banner" */
+  }
+  
+  .postular{
+    padding-left: 40%;
+    padding-right: 40%;
+  }
+
+  .postular button {
+    color: #ffffff;
+    background-color: #0071bc;
+    font-size: 25px;
+    border: 0px solid #2d63c8;
+    padding: 15px 50px;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 3px;
+    
+  }
+ .postular  button:hover {
+    color: #0071bc;
+    background-color: #ffffff;
+  }
+  
+  .logo {
+    width: 3.5rem; /* Adjust the width and height as needed */
+    height: 3rem;
+    margin-right: 1rem; /* Add some spacing between the logo and text */
+  }
+  
+  .text {
+    /* Additional styles for the text */
+  }
+  
+  .two-boxes-section {
+    padding-top: 5%;
+    display: flex;
+    background-color: #45b0e5;
+    border: 0px; /* Muestra las cajas en línea */
+  }
+  
+  .box {
+    flex: 1; /* Distribuye el espacio disponible entre las cajas */
+    padding: 20px;
+    border: 0px solid #ccc;
+  }
+  .box h2{
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .box p{
+    font-size: 3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    
+  }
+  .box2 {
+    flex: 1; /* Distribuye el espacio disponible entre las cajas */
+    padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 0px solid #ccc;
+    padding-top: 5%;
+  }
+  .four-paragraphs-section {
+    padding-top: 10%;
+    display: flex; /* Muestra los párrafos en línea */
+  }
+  
+  .paragraph {
+    flex: 1; /* Distribuye el espacio disponible entre los párrafos */
+    text-align: center;
+  }
+  
+  .paragraph img {
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  }
+  
+  
