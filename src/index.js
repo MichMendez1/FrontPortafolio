@@ -29,8 +29,7 @@ import Anotaciones from './views/Student/pages/Anotaciones';
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-  const { Nombre, Tipo } = user || {}
-  // const { Name, Email, Role } = user || {};         PROBLEMA!!!!!!!!!!!
+   const { Name, Email, Role } = user || {};         
   const isLoggedIn = user;
 
 const AppWithSidebar = () => (
