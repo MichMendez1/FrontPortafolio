@@ -37,17 +37,13 @@ const Navbar = () => {
                 Perfil
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/horarios" className="nav-link" activeClassName="active">
+                Horario
+              </NavLink>
+            </li>
             
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/asistenteadm">
-                    Administracion de usuarios
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/registro">
-                    Registro de usuarios
-                  </NavLink>
-                </li>
+                
             <li className="nav-item">
               <Button  style={{marginRight: "4rem"}} variant="outline-light" onClick={handleLogout}>
                   Salir
