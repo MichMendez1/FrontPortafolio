@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	background-color: #F2F2F2;
+}
+
+html {
+	font-size: 20px;
+}
+
+.cabezera {
+	height: 5.5rem;
+	background-color: #213c4e;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 2.5rem;
+}
+
+.img-cabezera{
+	max-width: auto;
+	height: 100%
+}
+
+.nombre-docente {
+	color: #213c4e;
+	margin: 1rem;
+	margin-left: 1.5rem;
+	font-size: 1.3rem;
+}
+
+.caja-componente {
+	padding: 1.5rem 4rem;
+}
+
+.btn,
+select, textarea {
+	padding: .5rem;
+	background-color: #ffffff;
+	font-size: 0.8rem;
+	height: 2.3rem;
+	border: 1px solid #dbdbdbd6;
+	border-radius: 5px;
+}
+
+.enlaces {
+	display: flex;
+	gap: 1rem;
+}
+
+.btn-cabezara {
+	border: none;
+	color: #f2f2f2;
+	background-color: transparent;
+}
+
+.btn-cabezara:hover {
+	color: #45b0e5;
+}
+
+.btn:hover {
+	background-color: #45b0e5;
+	box-shadow: 1px 5px 10px 2px #00000033;
+	border: 1px solid #a6bff0;
+}
+
+.btn:active {
+	background-color: #F2B749;
+	color: #F2F2F2;
+}
