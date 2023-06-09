@@ -1,0 +1,29 @@
+.form-seleccion-curso {
+	/* background-color: blue; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+select {
+	appearance: none
+}
+
+.curso-select {
+	width: 800px;
+	/* flex-grow: 1; */
+}
+
+.select-curso {
+	width: 400px;
+}
+
+.select-alumno {
+	width: 600px;
+}
+
+select:hover {
+	box-shadow: 1px 6px 10px 2px #00000008;
+}
