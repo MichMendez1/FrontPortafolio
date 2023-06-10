@@ -1,6 +1,5 @@
 import "./navbar.scss";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
 
@@ -15,9 +14,6 @@ const NavbarS = () => {
           </div>
           <div className="item">
             <MailOutlineOutlinedIcon className="icon"/>
-          </div>
-          <div className="item">
-            <PlagiarismOutlinedIcon  className="icon"/>
           </div>
         </div>
       </div>
