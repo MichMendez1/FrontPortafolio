@@ -8,6 +8,7 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Sidebar = () => {
   return (
@@ -40,6 +41,12 @@ const Sidebar = () => {
             <Link to="/student/notas" className='link'>
               <SchoolOutlinedIcon className="icon" />
               <span>Notas</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/student/perfil" className='link'>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Perfil</span>
             </Link>
           </li>
           <li>

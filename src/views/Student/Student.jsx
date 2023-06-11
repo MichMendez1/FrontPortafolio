@@ -11,7 +11,7 @@ const Student = () => {
     <div className='home'>
       <Sidebar />
       <div className="homeContainer">
-        <NavbarS />
+        {/* <NavbarS /> */}
         <div className="top">
           <h1>Bienvenido, </h1>
         </div>

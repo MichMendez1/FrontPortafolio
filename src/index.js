@@ -36,7 +36,7 @@ import 'bootstrap/scss/bootstrap.scss'
 import Asistencia from "./views/Student/pages/Asistencia"
 import Notas from './views/Student/pages/Notas';
 import Anotaciones from './views/Student/pages/Anotaciones';
-
+import Apoderado from './views/apoderado/Apoderado';
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
@@ -76,6 +76,13 @@ const AppWithSidebar = () => (
             <Route path= '/student/asistencia' element={<Asistencia/>}/>
             <Route path='/student/notas' element={<Notas/>} />
             <Route path='/student/anotaciones' element={<Anotaciones/>} />
+      </Route>
+
+      <Route path="apoderado">
+            <Route index element={<Apoderado/>} />
+            {/* <Route path= '/student/asistencia' element={<Asistencia/>}/>
+            <Route path='/student/notas' element={<Notas/>} />
+            <Route path='/student/anotaciones' element={<Anotaciones/>} /> */}
       </Route>
 
       <Route path="/administrador" element={<Administrador />} />
