@@ -1,0 +1,66 @@
+.caja-titulos{
+	display: flex;
+}
+
+.celda-titulo{
+	background-color: #213c4e;
+	color: #f2f2f2;
+	font-size: 18px;
+	text-align: center;
+	padding: 0.8rem;
+	border: 1px solid rgba(6, 6, 6, 0.731);
+}
+
+.caja-columnas{
+	border: 1px solid rgba(6, 6, 6, 0.731);
+	display: flex;
+	background-color: aqua;
+}
+
+.columna{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 2;	
+}
+
+.columnaContador{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.celda-contenido{
+	background-color: #ffffff;
+	font-size: 16px;
+	border: 1px solid rgba(6, 6, 6, 0.171);
+	padding: 0.6rem;
+	flex-grow: 1;
+}
+
+.columnaAnotaciones{
+	/* width: 20%; */
+}
+
+.celda-form{
+	text-align: center;
+}
+
+.caja-input{
+	display: inline;
+}
+
+label{
+	display: inline-block;
+	margin: 0 0.8rem;
+
+}
+
+.input-nota{
+	width: 2.5rem;
+}
+
+.caja-btn{
+	display: flex;
+	justify-content: center;
+	padding-top: 1.5rem;
+}

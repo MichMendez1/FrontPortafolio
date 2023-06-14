@@ -1,0 +1,26 @@
+.textAnotacion{
+    font-size: .8rem;
+    width: 100%;
+    height: 6rem;
+    background-color: #cfcfcfd6;
+}
+
+textarea:hover {
+    border: 1px solid #dbdbdbd6;
+    background-color: #ffffffd6;
+	box-shadow: 1px 6px 10px 2px #00000008;
+}
+
+textarea:focus{
+    outline:none;
+    text-decoration: none;
+    background-color: #ffffffd6;
+} 
+
+.caja-btn{
+    margin-top: .1rem;
+}
+
+.btn-crear{
+    width: 5rem;
+}
