@@ -5,6 +5,7 @@ import App from './App';
 import {createBrowserRouter,RouterProvider} from 'react-router-dom';
 import Login from './views/login/login';
 import Director from './views/director/director';
+import Poc from './views/test/Poc';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path:'/director',
     Component:Director
+  },
+  {
+    path:'/poc',
+    Component:Poc
   }
 ])
 

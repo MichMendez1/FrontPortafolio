@@ -13,6 +13,7 @@ const Director = () => {
 
     const [vista, setVista] = useState(0);
     const [selectCurso, setSelectcurso] = useState(0);
+    const [selectAlumno, setSelectAlumno] = useState(0);
 
     const [cursos, setCursos] = useState([
         {
@@ -20,27 +21,45 @@ const Director = () => {
             numAlumnos: 3,
             profJefe: 'Juan',
             id: 1,
-            alumnos: [{
-                nombre: 'Esteban',
-                promedioGeneral: 5.4,
-                apoderado: 'Antonio',
-                correo: 'esteban@colegionh.cl'
-            },
-            {
-                nombre: 'Andres',
-                promedioGeneral: 4.0,
-                apoderado: 'Roberto',
-                correo: 'andres@colegionh.cl'
-            },
-            ]
+            
         }, {
             nombre: '1-B',
             numAlumnos: 8,
             profJefe: 'Eduardo',
             id: 2,
-            alumnos: []
+            
         }
     ])
+
+
+    const [alumnos,setAlumno] = useState(
+        [
+            {
+                id:1,
+                nombre: 'Esteban',
+                promedioGeneral: 5.4,
+                apoderado: 'Antonio',
+                correo: 'esteban@colegionh.cl',
+                idCurso:1
+            },
+            {
+                id:2,
+                nombre: 'Andres',
+                promedioGeneral: 4.0,
+                apoderado: 'Roberto',
+                correo: 'andres@colegionh.cl',
+                idCurso:1
+            },
+            {
+                id:3,
+                nombre: 'Eduardo',
+                promedioGeneral: 6.0,
+                apoderado: 'alejandro',
+                correo: 'Eduardo@colegionh.cl',
+                idCurso:2
+            },
+        ]
+    )
 
     const [Profesores,setProfesores] = useState(
         [
@@ -102,6 +121,11 @@ const Director = () => {
 
     const SeleccionarCurso = (numVista, numCurso) => {
         setSelectcurso(numCurso);
+        setVista(numVista);
+    }
+
+    const SeleccionarAlumno = (numVista, numAlumno) => {
+        setSelectAlumno(numAlumno);
         setVista(numVista);
     }
 
@@ -169,7 +193,7 @@ const Director = () => {
                                         <th>{value.nombre} </th>
                                         <td>{value.profJefe} </td>
                                         <td>{value.numAlumnos}</td>
-                                        <td><button onClick={() => SeleccionarCurso(2, index)} className="btn btn-success" >Detalles </button>  </td>
+                                        <td><button onClick={() => SeleccionarCurso(2, value.id)} className="btn btn-success" >Detalles </button>  </td>
                                     </tr>
                                 )}
                             </tbody>
@@ -185,7 +209,7 @@ const Director = () => {
                     <div className="col-12" style={{ paddingTop: '2%' }} >
                         <img onClick={() => setVista(1)} src={FlechaAtras} style={{ width: '3%', cursor: 'pointer' }} />
                         <div style={{ paddingTop: '2%' }} >
-                            <h1 style={{ color: '#0071bc' }} >Curso {cursos[selectCurso].nombre} </h1>
+                            <h1 style={{ color: '#0071bc' }} >Curso {cursos[selectCurso-1].nombre} </h1>
                         </div>
                     </div>
                     <div className="offset-1 col-10" style={{ paddingTop: '8%' }} >
@@ -200,13 +224,13 @@ const Director = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cursos[selectCurso].alumnos.map((value, index) =>
+                                {alumnos.filter(alumno=>alumno.idCurso==selectCurso).map((value, index) =>
                                     <tr style={{ textAlign: 'center' }} >
                                         <th>{value.nombre} </th>
                                         <td>{value.apoderado} </td>
                                         <td>{value.correo}</td>
                                         <td>{value.promedioGeneral}</td>
-                                        <td><button className="btn btn-success" onClick={()=>setVista(3)} >Detalles </button>  </td>
+                                        <td><button className="btn btn-success" onClick={()=>SeleccionarAlumno(3,value.id)} >Detalles </button>  </td>
                                     </tr>
                                 )}
                             </tbody>
@@ -225,7 +249,28 @@ const Director = () => {
                             <h1 style={{ color: '#45b0e5' }} >Alumno </h1>
                         </div>
                     </div>
-                    
+                    <div className="offset-1 col-10" style={{ paddingTop: '5%' }} >
+                        <div class="card" style={{width:'100%'}}>
+                            <img src={Personas} style={{width:'10%',alignSelf:'center'}} class="card-img-top" alt="..."/>
+                            <div class="card-body">
+                                <h5 class="card-title">{alumnos[selectAlumno-1].nombre}</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <h6 style={{marginLeft:'1%'}} class="card-title">Datos Personales</h6>
+                                <p style={{marginLeft:'1%'}} >Apoderado: {alumnos[selectAlumno-1].apoderado}</p>
+                                <li class="list-group-item"></li>
+                                <h6 style={{marginLeft:'1%'}} class="card-title">Datos Academicos</h6>
+                                <p style={{marginLeft:'1%'}} >Promedio: {alumnos[selectAlumno-1].promedioGeneral}</p>
+                                <li class="list-group-item"></li>
+                                <h6 style={{marginLeft:'1%'}} class="card-title">Anotaciones</h6>
+                                <li class="list-group-item">A third item</li>
+                            </ul>
+                            <div className="card-body" style={{width:'100%',textAlign:'end'}}  >
+                                <button className="btn btn-success">Editar</button>
+                                <button style={{marginLeft:'2%'}} className="btn btn-danger">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
                     
                 </div>
             )
@@ -400,7 +445,7 @@ const Director = () => {
                 </div>
 
                 <div className="col-10" >
-                    <RenderVistas>w</RenderVistas>
+                    <RenderVistas></RenderVistas>
                 </div>
 
             </div>
