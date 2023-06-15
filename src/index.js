@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
+import Director from './views/director/director';
+import Poc from './views/test/Poc';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './views/login';
 import UserPage from './views/Asistente/AdministracionEstudiantes';
@@ -46,7 +48,7 @@ const user = JSON.parse(sessionStorage.getItem('user'));
 const AppWithSidebar = () => (
 
   <div>
-    {isLoggedIn ? <Navbar /> : <NavNolog />}
+    {isLoggedIn ? <Navbar /> : <NavNolog />} 
 
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -98,6 +100,9 @@ const AppWithSidebar = () => (
       {/*     <Route path="/edit/:id" element={<Edit />} />
        */}
 
+      <Route path='/director' element={<Director/>} />
+      <Route path='/poc' element={<Poc/>} />
+      
     </Routes>
   </div>
 );

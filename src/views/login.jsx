@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './login.css';
+import './login/login.css';
 import Logo from '../img/Nuevos Horizontes.png';
 import bcrypt from 'bcryptjs';
 
