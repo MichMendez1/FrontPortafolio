@@ -1,0 +1,17 @@
+.asistencia-container {
+  display: flex;
+
+  .content {
+    flex: 1;
+    padding: 40px;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+
+    .table-responsive {
+      width: 100%;
+      
+      
+    }
+  }
+}

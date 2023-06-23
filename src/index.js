@@ -35,20 +35,25 @@ import ProfesoresPage from './views/NuestroEquipo/NuestroEquipo';
 import Horarios from './views/Horario/horario';
 import Student from './views/Student/Student';
 import 'bootstrap/scss/bootstrap.scss'
-import Asistencia from "./views/Student/pages/Asistencia"
-import Notas from './views/Student/pages/Notas';
-import Anotaciones from './views/Student/pages/Anotaciones';
+import Asistencia1 from "./views/Student/pages/Asistencia"
+import Notas1 from './views/Student/pages/Notas';
+import Anotaciones1 from './views/Student/pages/Anotaciones';
 import Apoderado from './views/apoderado/Apoderado';
+import Estudiante from './views/estudiante/Estudiante';
+import Asistencia from './views/estudiante/pages/Asistencia';
+import Notas from './views/estudiante/pages/Notas';
+import Anotaciones from './views/estudiante/pages/Anotaciones';
+import PerfilEst from './views/estudiante/pages/Perfil';
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-   const { Name, Email, Role } = user || {};         
-  const isLoggedIn = user;
+const { Name, Email, Role } = user || {};
+const isLoggedIn = user;
 
 const AppWithSidebar = () => (
 
   <div>
-    {isLoggedIn ? <Navbar /> : <NavNolog />} 
+     {/* {isLoggedIn ? <Navbar /> : <NavNolog />}   */}
 
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -74,15 +79,25 @@ const AppWithSidebar = () => (
       <Route path="/horarios" element={<Horarios />} />
 
       <Route path="student">
-            <Route index element={<Student/>} />
-            <Route path= '/student/asistencia' element={<Asistencia/>}/>
-            <Route path='/student/notas' element={<Notas/>} />
-            <Route path='/student/anotaciones' element={<Anotaciones/>} />
+        <Route index element={<Student />} />
+        <Route path='/student/asistencia' element={<Asistencia1 />} />
+        <Route path='/student/notas' element={<Notas1 />} />
+        <Route path='/student/anotaciones' element={<Anotaciones1 />} />
+      </Route>
+
+      <Route path='estudiante'>
+        <Route index element={<Estudiante />} />
+        <Route path='/estudiante/asistencia' element={<Asistencia />} />
+        <Route path='/estudiante/notas' element={<Notas />} />
+        <Route path='/estudiante/anotaciones' element={<Anotaciones />} />  
+        <Route path='/estudiante/perfil' element={<PerfilEst />} />  
+
+
       </Route>
 
       <Route path="apoderado">
-            <Route index element={<Apoderado/>} />
-            {/* <Route path= '/student/asistencia' element={<Asistencia/>}/>
+        <Route index element={<Apoderado />} />
+        {/* <Route path= '/student/asistencia' element={<Asistencia/>}/>
             <Route path='/student/notas' element={<Notas/>} />
             <Route path='/student/anotaciones' element={<Anotaciones/>} /> */}
       </Route>
@@ -96,13 +111,13 @@ const AppWithSidebar = () => (
       <Route path="/registerteacher" element={<RegisterTeacher />} />
       <Route path="/editworker" element={<EditWorker />} />
       <Route path="/headers" element={<Headers />} />
-      <Route path="/userprofile/:id" element={<Profile/>} />
+      <Route path="/userprofile/:id" element={<Profile />} />
       {/*     <Route path="/edit/:id" element={<Edit />} />
        */}
 
-      <Route path='/director' element={<Director/>} />
-      <Route path='/poc' element={<Poc/>} />
-      
+      <Route path='/director' element={<Director />} />
+      <Route path='/poc' element={<Poc />} />
+
     </Routes>
   </div>
 );
