@@ -1,50 +1,62 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Form, Button, Table } from "react-bootstrap";
 import Sidebar from "../SideBar/SideBar";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const CrudEstudiantes = () => {
   const [users, setUsers] = useState([]);
-  const [CursoID, setCursoID] = useState("");
-  const [Nombre, setNombre] = useState("");
-  const [Apellido_Paterno, setApellido_Paterno] = useState("");
-  const [Apellido_Materno, setApellido_Materno] = useState("");
-  const [Fecha_Nacimiento, setFecha_Nacimiento] = useState("");
-  const [Colegio_De_Procedencia, setColegio_De_Procedencia] = useState("");
-  const [Nacionalidad, setNacionalidad] = useState("");
-  const [Direccion, setDireccion] = useState("");
-  const [Correo, setCorreo] = useState("");
-  const [Contraseña, setContraseña] = useState("");
-  const [Genero, setGenero] = useState("");
-  const [Rut, setRut] = useState("");
-  const [Tipo, setTipo] = useState("Estudiante");
+  const [cursoID, setCursoID] = useState("");
+  const [nombres, setNombres] = useState("");
+  const [apellido_paterno, setApellidoPaterno] = useState("");
+  const [apellido_materno, setApellidoMaterno] = useState("");
+  const [fecha_nacimiento, setFechaNacimiento] = useState("");
+  const [nacionalidad, setNacionalidad] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [genero, setGenero] = useState("");
+  const [rut, setRut] = useState("");
+  const [tipo, setTipo] = useState("Estudiante");
   const [formValid, setFormValid] = useState(false);
-  const [RutValido, setRutValido] = useState(true);
+  const [rutValido, setRutValido] = useState(true);
   const [editing, setEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    AlumnoID: null,
-    CursoID: "",
-    Nombre: "",
-    Apellido_Paterno: "",
-    Apellido_Materno: "",
-    Fecha_Nacimiento: "",
+    _id: null,
+    cursoID: "",
+    nombres: "",
+    apellido_paterno: "",
+    apellido_materno: "",
+    fecha_nacimiento: "",
     Colegio_De_Procedencia: "",
-    Nacionalidad: "",
-    Direccion: "",
-    Correo: "",
-    Contraseña: "",
-    Genero: "",
-    Rut: "",
-    Tipo: "",
+    nacionalidad: "",
+    direccion: "",
+    email: "",
+    password: "",
+    genero: "",
+    rut: "",
+    tipo: "",
   });
 
-  const baseUrl = "http://localhost:3001/estudiantes";
+  const baseUrl = "http://localhost:4000/api/estudiantes";
   const cursos = "http://localhost:3001/cursos";
 
   useEffect(() => {
-    getUsers();
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/api/estudiantes/usuarios");
+      setUsers(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
     setFormValid(checkFormValidity());
-  }, [RutValido]);
+  }, [rutValido]);
+
   const calcularDigitoVerificador = (rut) => {
     let suma = 0;
     let multiplo = 2;
@@ -58,11 +70,10 @@ const CrudEstudiantes = () => {
     return resultado === 11 ? "0" : resultado === 10 ? "K" : resultado.toString();
   };
 
-  const handleRutChange = (event) => {
+  const handlerutChange = (event) => {
     const rut = event.target.value;
     setRut(rut);
 
-    // Verificar si el RUT es válido
     const rutSinGuiones = rut.replace(/\./g, "").replace(/-/g, "");
     const digitoVerificador = rutSinGuiones.slice(-1);
     const rutNumerico = rutSinGuiones.slice(0, -1);
@@ -74,331 +85,322 @@ const CrudEstudiantes = () => {
       setRutValido(false);
     }
   };
+
   const checkFormValidity = () => {
-    // Verificar la validez de los campos y retornar true o false
-    return RutValido; // Puedes agregar más validaciones aquí si tienes otros campos
-  };
-  
-  const getCursos = async () => {
-    try {
-      const response = await fetch("cursos");
-      if (response.ok) {
-        const data = await response.json();
-        setUsers(data);
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    return rutValido;
   };
 
   const getUsers = async () => {
     try {
-      const response = await fetch(baseUrl);
-      if (response.ok) {
-        const data = await response.json();
-        setUsers(data);
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const response = await axios.get(baseUrl);
+      setUsers(response.data);
     } catch (error) {
-      console.error("Error:", error);
+      console.log("Error:", error);
     }
   };
 
-  const handleSubmit = async (event) => {
+  const addUser = async (event) => {
     event.preventDefault();
-    if (editing) {
-      try {
-        const updatedUser = {
-          ...currentUser,
-          CursoID,
-          Nombre,
-          Apellido_Paterno,
-          Apellido_Materno,
-          Fecha_Nacimiento,
-          Colegio_De_Procedencia,
-          Nacionalidad,
-          Direccion,
-          Correo,
-          Contraseña,
-          Genero,
-          Rut,
-          Tipo: Tipo === "Estudiante" ? CursoID : "",
-        };
-        const response = await fetch(`${baseUrl}/${currentUser.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        });
-        if (response.ok) {
-          getUsers();
-          resetForm();
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    } else {
-      try {
-        const newUser = {
-          AlumnoID: uuidv4(),
-          CursoID,
-          Nombre,
-          Apellido_Paterno,
-          Apellido_Materno,
-          Fecha_Nacimiento,
-          Colegio_De_Procedencia,
-          Nacionalidad,
-          Direccion,
-          Correo,
-          Contraseña,
-          Genero,
-          Rut,
-          Tipo: Tipo === "Estudiante" ? CursoID : "",
-        };
-        const response = await fetch(baseUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        });
-        if (response.ok) {
-          getUsers();
-          resetForm();
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
-  };
 
-  const handleEdit = (id) => {
-    const userToEdit = users.find((user) => user.id === id);
-    setEditing(true);
-    setCurrentUser(userToEdit);
-    setCursoID(userToEdit.CursoID);
-    setNombre(userToEdit.Nombre);
-    setApellido_Paterno(userToEdit.Apellido_Paterno);
-    setApellido_Materno(userToEdit.Apellido_Materno);
-    setFecha_Nacimiento(userToEdit.Fecha_Nacimiento);
-    setColegio_De_Procedencia(userToEdit.Colegio_De_Procedencia);
-    setNacionalidad(userToEdit.Nacionalidad);
-    setDireccion(userToEdit.Direccion);
-    setCorreo(userToEdit.Correo);
-    setContraseña(userToEdit.Contraseña);
-    setGenero(userToEdit.Genero);
-    setRut(userToEdit.Rut);
-    setTipo(userToEdit.Tipo);
-  };
+    const newUser = {
+      cursoID,
+      nombres,
+      apellido_paterno,
+      apellido_materno,
+      fecha_nacimiento,
+      nacionalidad,
+      direccion,
+      email,
+      password,
+      genero,
+      rut,
+      tipo,
+      _id: uuidv4(),
+    };
 
-  const handleDelete = async (id) => {
     try {
-      const response = await fetch(`${baseUrl}/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        getUsers();
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      await axios.post(baseUrl, newUser);
+      getUsers();
+      resetForm();
     } catch (error) {
-      console.error("Error:", error);
+      console.log("Error:", error);
     }
   };
 
-  const handleRoleChange = (event) => {
-    setTipo(event.target.value);
-    if (event.target.value !== "Estudiante") {
-      setCursoID("");
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`${baseUrl}/usuarios${id}`);
+      getUsers();
+    } catch (error) {
+      console.log("Error:", error);
     }
   };
+
+  const editUser = (user) => {
+    setEditing(true);
+    setCurrentUser(user);
+  };
+
+  const updateUser = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.put(`${baseUrl}/usuarios${currentUser._id}`, currentUser);
+      getUsers();
+      resetForm();
+    } catch (error) {
+      console.log("Error:", error);
+    }
+
+    setEditing(false);
+    setCurrentUser({
+      _id: null,
+      cursoID: "",
+      nombres: "",
+      apellido_paterno: "",
+      apellido_materno: "",
+      fecha_nacimiento: "",
+      nacionalidad: "",
+      direccion: "",
+      email: "",
+      password: "",
+      genero: "",
+      rut: "",
+      tipo: "",
+    });
+  };
+  const confirmarUsuario = async (token) => {
+    try {
+      const response = await axios.put(`http://localhost:4000/api/estudiantes/confirmar/${token}`);
+      console.log(response.data); // Mensaje de confirmación del backend
+      fetchUsers(); // Vuelve a cargar la lista de usuarios después de confirmar
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const resetForm = () => {
     setCursoID("");
-    setNombre("");
-    setApellido_Paterno("");
-    setApellido_Materno("");
-    setFecha_Nacimiento("");
-    setColegio_De_Procedencia("");
+    setNombres("");
+    setApellidoPaterno("");
+    setApellidoMaterno("");
+    setFechaNacimiento("");
     setNacionalidad("");
     setDireccion("");
-    setCorreo("");
-    setContraseña("");
+    setEmail("");
+    setPassword("");
     setGenero("");
     setRut("");
-    setTipo("");
-    setEditing(false);
-    setCurrentUser({
-      AlumnoID: null,
-      CursoID: "",
-      Nombre: "",
-      Apellido_Paterno: "",
-      Apellido_Materno: "",
-      Fecha_Nacimiento: "",
-      Colegio_De_Procedencia: "",
-      Nacionalidad: "",
-      Direccion: "",
-      Correo: "",
-      Contraseña: "",
-      Genero: "",
-      Rut: "",
-      Tipo: "",
-    });
+    setTipo("Estudiante");
   };
 
   return (
     <Fragment>
+      <Sidebar />
       <Container>
-        <h1 className="my-5">Administracion de usuarios</h1>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Curso ID</Form.Label>
+        <h1>Estudiantes</h1>
+
+        <Form onSubmit={editing ? updateUser : addUser}>
+          <Form.Group controlId="formCursoID">
+            <Form.Label>ID del Curso</Form.Label>
             <Form.Control
               type="text"
-              value={CursoID}
-              onChange={(event) => setCursoID(event.target.value)}
+              value={cursoID}
+              onChange={(e) => setCursoID(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Nombre</Form.Label>
+
+          <Form.Group controlId="formNombres">
+            <Form.Label>Nombres</Form.Label>
             <Form.Control
               type="text"
-              value={Nombre}
-              onChange={(event) => setNombre(event.target.value)}
+              value={nombres}
+              onChange={(e) => setNombres(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formApellidoPaterno">
             <Form.Label>Apellido Paterno</Form.Label>
             <Form.Control
               type="text"
-              value={Apellido_Paterno}
-              onChange={(event) => setApellido_Paterno(event.target.value)}
+              value={apellido_paterno}
+              onChange={(e) => setApellidoPaterno(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formApellidoMaterno">
             <Form.Label>Apellido Materno</Form.Label>
             <Form.Control
               type="text"
-              value={Apellido_Materno}
-              onChange={(event) => setApellido_Materno(event.target.value)}
+              value={apellido_materno}
+              onChange={(e) => setApellidoMaterno(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formFechaNacimiento">
             <Form.Label>Fecha de Nacimiento</Form.Label>
             <Form.Control
               type="date"
-              value={Fecha_Nacimiento}
-              onChange={(event) => setFecha_Nacimiento(event.target.value)}
+              value={fecha_nacimiento}
+              onChange={(e) => setFechaNacimiento(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Colegio de Procedencia</Form.Label>
-            <Form.Control
-              type="text"
-              value={Colegio_De_Procedencia}
-              onChange={(event) =>
-                setColegio_De_Procedencia(event.target.value)
-              }
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formNacionalidad">
             <Form.Label>Nacionalidad</Form.Label>
             <Form.Control
               type="text"
-              value={Nacionalidad}
-              onChange={(event) => setNacionalidad(event.target.value)}
+              value={nacionalidad}
+              onChange={(e) => setNacionalidad(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formDireccion">
             <Form.Label>Dirección</Form.Label>
             <Form.Control
               type="text"
-              value={Direccion}
-              onChange={(event) => setDireccion(event.target.value)}
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Correo</Form.Label>
+
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              value={Correo}
-              onChange={(event) => setCorreo(event.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Género</Form.Label>
-            <Form.Select
-              value={Genero}
-              onChange={(event) => setGenero(event.target.value)}
-            >
-              <option value="">Selecciona...</option>
-              <option value="male">Masculino</option>
-              <option value="female">Femenino</option>
-              <option value="other">Otro</option>
-            </Form.Select>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </Form.Group>
-          <Form.Group className="mb-3">
+
+          <Form.Group controlId="formGenero">
+            <Form.Label>Género</Form.Label>
+            <Form.Control
+              as="select"
+              value={genero}
+              onChange={(e) => setGenero(e.target.value)}
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="formRut">
             <Form.Label>RUT</Form.Label>
             <Form.Control
               type="text"
-              value={Rut}
-              onChange={handleRutChange}
-              isInvalid={!RutValido}
+              value={rut}
+              onChange={handlerutChange}
+              required
             />
-            {!RutValido && (
-              <Form.Control.Feedback type="invalid">
-                RUT inválido
-              </Form.Control.Feedback>
+            {!rutValido && (
+              <Form.Text className="text-danger">
+                El RUT ingresado no es válido.
+              </Form.Text>
             )}
           </Form.Group>
-          <Button variant="primary" type="submit" className="mb-3" disabled={!formValid}>
-          {editing ? "Actualizar" : "Crear"}
+
+          <Form.Group controlId="formTipo">
+            <Form.Label>Tipo de Usuario</Form.Label>
+            <Form.Control
+              as="select"
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+              required
+            >
+              <option value="Estudiante">Estudiante</option>
+              <option value="Profesor">Profesor</option>
+              <option value="Administrador">Administrador</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Button variant="primary" type="submit" disabled={!formValid}>
+            {editing ? "Actualizar" : "Agregar"}
           </Button>
+          {editing && (
+            <Button variant="secondary" onClick={resetForm}>
+              Cancelar
+            </Button>
+          )}
         </Form>
+
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nombre</th>
+              <th>ID del Curso</th>
+              <th>Nombres</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+              <th>Fecha de Nacimiento</th>
+              <th>Nacionalidad</th>
+              <th>Dirección</th>
               <th>Email</th>
-              <th>Rut</th>
-              <th>Curso</th>
+              <th>Género</th>
+              <th>RUT</th>
+              <th>Tipo</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.AlumnoID}</td>
+              <tr key={user._id}>
+                <td>{user._id}</td>
+                <td>{user.cursoID}</td>
+                <td>{user.nombres}</td>
+                <td>{user.apellido_paterno}</td>
+                <td>{user.apellido_materno}</td>
+                <td>{user.fecha_nacimiento}</td>
+                <td>{user.nacionalidad}</td>
+                <td>{user.direccion}</td>
+                <td>{user.email}</td>
+                <td>{user.genero}</td>
+                <td>{user.rut}</td>
+                <td>{user.tipo}</td>
                 <td>
-                  {user.Nombre}
-                  {user.Apellido_Paterno}
-                  {user.Apellido_Materno}
-                </td>
-                <td>{user.Correo}</td>
-                <td>{user.Rut}</td>
-                <td>{user.CursoID}</td>
-                <td>
+                  {/* Botón para confirmar usuario */}
+                  {!user.confirmado && user.token && (
+                    <Button
+                      variant="success"
+                      onClick={() => confirmarUsuario(user.token)}
+                      className="mr-2"
+                    >
+                      Confirmar
+                    </Button>
+                  )}
                   <Button
                     variant="primary"
-                    className="mx-2"
-                    onClick={() => handleEdit(user.id)}
+                    onClick={() => editUser(user)}
+                    className="mr-2"
                   >
                     Editar
                   </Button>
                   <Button
                     variant="danger"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => deleteUser(user._id)}
                   >
-                    Borrar
+                    Eliminar
                   </Button>
                 </td>
               </tr>

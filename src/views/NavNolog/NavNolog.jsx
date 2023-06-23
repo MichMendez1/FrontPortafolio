@@ -6,7 +6,7 @@ function NavNolog() {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-dark"
+        className="navbar navbar-expand-md navbar-dark"
         style={{ backgroundColor: "#213c4e" }}
       >
         <div className="container">

@@ -38,17 +38,18 @@ import 'bootstrap/scss/bootstrap.scss'
 import Asistencia from "./views/Student/pages/Asistencia"
 import Notas from './views/Student/pages/Notas';
 import Anotaciones from './views/Student/pages/Anotaciones';
+import EstudianteApp from './views/Asistente/admEstudiante/EstudianteApp';
 
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-   const { Name, Email, Role } = user || {};         
+   const { Tipo } = user || {};         
   const isLoggedIn = user;
 
 const AppWithSidebar = () => (
 
   <div>
-    {isLoggedIn ? <Navbar /> : <NavNolog />} 
+
 
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -64,7 +65,7 @@ const AppWithSidebar = () => (
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/registro" element={<RegistroEstudiante />} />
-      <Route path="/admEstudiantes" element={<CrudEstudiantes />} />
+      <Route path="/admEstudiantes" element={<EstudianteApp />}/>
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/admApoderados" element={<CrudApoderados />} />

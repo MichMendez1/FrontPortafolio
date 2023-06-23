@@ -8,7 +8,11 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+const handleLogout=()=>{
+  sessionStorage.removeItem('user');
+  window.location.href="/login"
 
+}
 const Sidebar = () => {
   return (
     <div className='sidebar'>
@@ -42,8 +46,8 @@ const Sidebar = () => {
               <span>Notas</span>
             </Link>
           </li>
-          <li>
-            <ExitToAppIcon className="icon" />
+          <li onClick={handleLogout}>
+            <ExitToAppIcon className="icon"  />
             <span>Cerrar Sesión</span>
           </li>
         </ul>

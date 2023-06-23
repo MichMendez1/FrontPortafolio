@@ -1,84 +1,72 @@
-import React, { useState } from "react";
-import './login/login.css';
-import Logo from '../img/Nuevos Horizontes.png';
-import bcrypt from 'bcryptjs';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const handleRegistro = () => {
-    window.location.href = "/registro";
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const [datos, setDatos] = useState({
-    Correo: '',
-    Contraseña: ''
-  });
+  const navigate = useNavigate();
 
-  const baseUrl = "http://localhost:3001/estudiantes";
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleInputChange = (e) => {
-    setDatos({
-      ...datos,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleLogin = async () => {
     try {
-      const response = await fetch(`${baseUrl}?Correo=${datos.Correo}`);
+      const response = await fetch("http://localhost:4000/api/estudiantes/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
       if (response.ok) {
-        const users = await response.json();
+        console.log('Autenticación exitosa');
+        console.log('Token:', data.token);
+        setError('');
 
-        if (users.length > 0) {
-          const user = users[0];
-          const isPasswordMatch = await bcrypt.compare(datos.Contraseña, user.Contraseña);
-
-          if (isPasswordMatch) {
-            // Passwords match, user is authenticated
-            alert('Login successful');
-            sessionStorage.setItem('user', JSON.stringify(user));
-            window.location.href = "./";
-
-            // Proceed with further actions, such as storing user data in session storage or redirecting to a new page
-          } else {
-            // Passwords do not match
-            alert('Invalid email or password');
-          }
-        } else {
-          // User with the provided email does not exist
-          alert('Invalid email or password');
-        }
+        // Guardar usuario en sessionStorage
+        sessionStorage.setItem('user', JSON.stringify(data));
+        console.log(data.nombres); // Acceder al atributo 'nombres' del usuario
+        console.log(data.tipo);
+        // Redireccionar a la página deseada
+        navigate('/student');
       } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        console.log('Autenticación fallida');
+        console.log('Mensaje de error:', data.msg);
+        setError(data.msg);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred during login');
+      console.log('Error:', error);
+      setError('Ocurrió un error en el servidor');
     }
   };
 
   return (
-    <div className="Background">
-      <div className="card">
-        <img className="logo" src={Logo} alt="logo" />
-        <div className="card-body">
-          <div className="mb-3 row">
-            <label htmlFor="inputEmail" >Correo</label>
-            <div className="col-sm-10">
-              <input type="email" className="form-control" onChange={handleInputChange} name='Correo' id="inputCorreo" />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" >Contraseña</label>
-            <div className="col-sm-10">
-              <input type="password" name="Contraseña" onChange={handleInputChange} className="form-control" id="inputContraseña" />
-            </div>
-          </div>
-        </div>
-        <button className="btn-primario" onClick={handleLogin}>Iniciar Sesion</button>
-        <button className="btn-tertiario" onClick={handleRegistro}>¿No tienes una cuenta?</button>
-      </div>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
+        <button type="submit">Iniciar sesión</button>
+        {error && <p>{error}</p>}
+      </form>
     </div>
   );
-}
+};
 
 export default Login;
