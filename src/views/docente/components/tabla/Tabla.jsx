@@ -43,7 +43,7 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 							className="celda-contenido"
 							key={alumno.id}
 						>
-							{alumno.nombre}
+							{alumno.nombres}
 						</div>)}
 				</div>
 				<div className="columna">
@@ -53,7 +53,7 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 							className="celda-contenido"
 							key={alumno.id}  
 						>
-							{alumno.apellido}
+							{alumno.apellido_paterno+' '+alumno.apellido_materno}
 						</div>)}
 				</div>
 
@@ -80,7 +80,7 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 					
 			<div className="caja-btn">
 				<button 
-					className="btn btn-tabla" 
+					className="btn-d btn-tabla" 
 					type="submit" 
 					form="formTabla"
 					onClick={() => setModal(!modal)}>
@@ -131,11 +131,15 @@ function tablaAlumno(listaAnotaciones){
 
 
 /* funcion principal */
-function Tabla({listaAlumnos, listaAnotaciones, tipoTabla, modal, setModal, useTabla}) {
-	return (useTabla)
-		? tablaCurso(listaAlumnos, tipoTabla, setModal, modal)
-		: tablaAlumno(listaAnotaciones)
-}
+function Tabla({listaAlumnos, listaAnotaciones, tipoTabla, modal, setModal, useTabla, mostrarTabla}) {
+	// if (!mostrarTabla){
+	// 	return <span>Lista....</span>
+	// }else {
+		return (useTabla)
+			? tablaCurso(listaAlumnos, tipoTabla, setModal, modal)
+			: tablaAlumno(listaAnotaciones)
+	} 
+// }
 
 export default Tabla
 

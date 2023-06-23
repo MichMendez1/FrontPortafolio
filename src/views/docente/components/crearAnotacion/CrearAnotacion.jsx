@@ -16,7 +16,7 @@ function CrearAnotacion ({useCrearAnotacion, modal, setModal}){
             </textarea>
 
             <div className="caja-btn">    
-                <button className="btn btn-crear" onClick={handleSubmit}>
+                <button className="btn-d btn-crear" onClick={handleSubmit}>
                     Crear
                 </button>
             </div>    

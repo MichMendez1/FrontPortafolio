@@ -24,16 +24,16 @@ function formCurso(buscarCurso, cursos){
                     {cursos.map(curso => {
                         return(
                             <option
-                            key={curso.id}
-                            value={curso.nombre}
+                            key={curso}
+                            value={curso}
                             >
-                                {curso.nombre}
+                                {curso.replace('_', ' ').toUpperCase()}
                             </option>
                         )
                     })}
             </select>
 
-            <button className="btn btn-buscar" type="submit">Buscar</button>
+            <button className="btn-d btn-buscar" type="submit">Buscar</button>
         </form>
     </>
 }
@@ -70,10 +70,10 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
                     {cursos.map(curso => {
                         return(
                             <option
-                            key={curso.id}
-                            value={curso.nombre}
+                            key={curso}
+                            value={curso}
                             >
-                                {curso.nombre}
+                                {curso.replace('_', ' ').toUpperCase()}
                             </option>
                         )
                     })}
@@ -106,7 +106,7 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
             </select>
             
             
-            <button className="btn" type="submit">Buscar</button>
+            <button className="btn-d" type="submit">Buscar</button>
         </form>
     </>
 }
@@ -115,16 +115,18 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
 
 
 /* funcion principal */
-function Buscador ({alumnos, cursos, anotaciones, setAnotaciones, setAlumnos, useBuscador, setCrearAnotaciones}){
+function Buscador ({alumnos, cursos, anotaciones, setAnotaciones, setAlumnos, useBuscador, setCrearAnotaciones, setMostrarTabla}){
     const [listaAlumnos, setListaAlumno] = useState(null)
 
     const buscarCurso = (event) => {
         event.preventDefault()
         const datos = new FormData(event.target)
         const eleccion = datos.get('seleccionCurso')
-        const curso = alumnos.filter(alumno => alumno.curso === eleccion)
+        const curso = alumnos.filter(alumno => alumno.cursoID === eleccion)
         if (curso.length === 0) return false
+        console.log(curso)
         setAlumnos(curso)
+        setMostrarTabla(true)
     }
 
     const buscarAnotaciones = (event) => {
@@ -137,6 +139,8 @@ function Buscador ({alumnos, cursos, anotaciones, setAnotaciones, setAlumnos, us
         setAnotaciones(textos)  
         setCrearAnotaciones(true)   
     }
+
+    if(!cursos) return <div>te esperas</div>
 
     return (useBuscador)
         ? formCurso(buscarCurso, cursos)
