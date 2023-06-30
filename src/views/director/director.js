@@ -5,6 +5,10 @@ import Calendario from '../../img/calendar2-date.svg';
 import FlechaAtras from '../../img/arrow-left-square-fill.svg';
 import Personas from '../../img/people-fill.svg';
 import Moneda from '../../img/coin.svg';
+import responseCursos from "../docente/mocks/lista-cursos.json"
+
+import URL from '../Url';
+
 
 
 const Director = () => {
@@ -14,7 +18,7 @@ const Director = () => {
     const [vista, setVista] = useState(0);
     const [selectCurso, setSelectcurso] = useState(0);
     const [selectAlumno, setSelectAlumno] = useState(0);
-    const [estadoInput,setEstadoInput] = useState('Disable')
+    const [estadoInput,setEstadoInput] = useState(1)
     const [cursos, setCursos] = useState([
         {
             nombre: '1-A',
@@ -71,18 +75,24 @@ const Director = () => {
         [
             {
                 nombre:'Juan',
+                apellido_materno:'Gonzales',
+                apellido_paterno:'Duran',
                 asignatura:'Matematicas',
                 sueldo:500000,
                 jefatura:'1-A'
             },
             {
                 nombre:'Eduardo',
+                apellido_materno:'Gonzales',
+                apellido_paterno:'Tapia',
                 asignatura:'Lenguaje',
                 sueldo:500000,
                 jefatura:'1-B'
             }
         ]
     )
+
+    const [selectProfesor,setSelectProf] = useState(0);
 
     const [gastos,setGastos]=useState(
         [
@@ -119,8 +129,6 @@ const Director = () => {
 
     const [total,setTotal]=useState(200000+350000+600000+3000000+1000000+2000000)
 
-    
-
     const Volver = () => {
         navigate('/login');
     }
@@ -134,10 +142,30 @@ const Director = () => {
         setSelectAlumno(numAlumno);
         setVista(numVista);
     }
+    const SeleccionarProf = (numVista, numProf) => {
+        setSelectProf(numProf);
+        setVista(numVista);
+    }
 
+    useEffect= ()=>{
+        obtenerEstudiantes();
+    }       
 
-
-
+    const obtenerEstudiantes = async ()=>{
+        try {
+            const response = await fetch(URL+'/api/estudiantes/usuarios',);
+            if(response.ok){
+                const data = await response.json()
+                console.log(data);
+                setAlumno(data)
+            }
+            else{
+                console.log(response);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const Render0 = () => {
         //General
         return (
@@ -157,9 +185,9 @@ const Director = () => {
                     </div>
                     <div onClick={() => setVista(4)} className="offset-1 col-2" style={{ backgroundColor: '#45b0e5', textAlign: 'center', paddingTop: '5%', borderRadius: '50%', aspectRatio: '1/1', cursor: 'pointer' }} >
                         <div>
-                            <img src={Personas} style={{ width: '20%', color: 'white' }} />
+                            <img src={Personas} style={{ width: '30%', color: 'white' }} />
                         </div>
-                        <h2>Trabajadores</h2>
+                        <h5 style={{width:"100%"}} >Trabajadores</h5>
                     </div>
                     <div onClick={() => setVista(8)} className="offset-1 col-2" style={{ backgroundColor: '#0071bc', textAlign: 'center', paddingTop: '5%', borderRadius: '50%', aspectRatio: '1/1', cursor: 'pointer' }} >
                         <div>
@@ -259,31 +287,64 @@ const Director = () => {
                     <div className="offset-1 col-10" style={{ paddingTop: '5%' }} >
                         <div class="card" style={{width:'100%'}}>
                             <img src={Personas} style={{width:'10%',alignSelf:'center'}} class="card-img-top" alt="..."/>
-                            <div class="card-body">
+                            {
+                                estadoInput == 1 ? 
+                                <div>
+                                <div class="card-body">
                                 <div className="form-group">
                                 <label>Nombre</label>
-                                <input value={alumnos[selectAlumno-1].nombre}/>
+                                <input value={alumnos[selectAlumno-1].nombre} disabled />
                                 <label>Apellido Paterno</label>
-                                <input value={alumnos[selectAlumno-1].apellido_paterno} />
+                                <input value={alumnos[selectAlumno-1].apellido_paterno} disabled />
                                 <label>Apellido Materno</label>
-                                <input value={alumnos[selectAlumno-1].apellido_materno} />
+                                <input value={alumnos[selectAlumno-1].apellido_materno} disabled />
                                 </div>
                                 
                             </div>
                             <ul class="list-group list-group-flush">
                                 <h6 style={{marginLeft:'1%'}} class="card-title">Datos Personales</h6>
-                                <p style={{marginLeft:'1%'}} >Apoderado: {alumnos[selectAlumno-1].apoderado}</p>
+                                <label style={{marginLeft:'1%'}}  >Apoderado: {}</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={alumnos[selectAlumno-1].apoderado} disabled />
                                 <li class="list-group-item"></li>
                                 <h6 style={{marginLeft:'1%'}} class="card-title">Datos Academicos</h6>
                                 <p style={{marginLeft:'1%'}} >Promedio: {alumnos[selectAlumno-1].promedioGeneral}</p>
                                 <li class="list-group-item"></li>
-                                <h6 style={{marginLeft:'1%'}} class="card-title">Anotaciones</h6>
-                                <li class="list-group-item">A third item</li>
                             </ul>
                             <div className="card-body" style={{width:'100%',textAlign:'end'}}  >
-                                <button className="btn btn-success">Editar</button>
+                                <button onClick={()=>setEstadoInput(0)} className="btn btn-success">Editar</button>
                                 <button style={{marginLeft:'2%'}} className="btn btn-danger">Eliminar</button>
                             </div>
+                            </div>
+
+                                :
+
+                                <div>
+                                <div class="card-body">
+                                <div className="form-group">
+                                <label>Nombre</label>
+                                <input value={alumnos[selectAlumno-1].nombre}  />
+                                <label>Apellido Paterno</label>
+                                <input value={alumnos[selectAlumno-1].apellido_paterno}  />
+                                <label>Apellido Materno</label>
+                                <input value={alumnos[selectAlumno-1].apellido_materno}  />
+                                </div>
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <h6 style={{marginLeft:'1%'}} class="card-title">Datos Personales</h6>
+                                <label style={{marginLeft:'1%'}}  >Apoderado: {}</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={alumnos[selectAlumno-1].apoderado}  />
+                                <li class="list-group-item"></li>
+                                <h6 style={{marginLeft:'1%'}} class="card-title">Datos Academicos</h6>
+                                <p style={{marginLeft:'1%'}} >Promedio: {alumnos[selectAlumno-1].promedioGeneral}</p>
+                                <li class="list-group-item"></li>
+                            </ul>
+                            <div className="card-body" style={{width:'100%',textAlign:'end'}}  >
+                                <button onClick={()=>setEstadoInput(0)} className="btn btn-success">Guardar</button>
+                                <button style={{marginLeft:'2%'}} className="btn btn-danger">Eliminar</button>
+                            </div>
+                            </div>
+                            }
                         </div>
                     </div>
                     
@@ -358,7 +419,7 @@ const Director = () => {
                                         <td>{value.asignatura} </td>
                                         <td>{value.jefatura} </td>
                                         <td>${value.sueldo}</td>
-                                        <td><button className="btn btn-success" onClick={()=>setVista(6)} >Detalles </button>  </td>
+                                        <td><button className="btn btn-success" onClick={()=>SeleccionarProf(6,index)} >Detalles </button>  </td>
                                     </tr>
                                 )}
                             </tbody>
@@ -377,6 +438,69 @@ const Director = () => {
                         <img onClick={() => setVista(5)} src={FlechaAtras} style={{ width: '3%', cursor: 'pointer' }} />
                         <div style={{ paddingTop: '2%' }} >
                             <h1 style={{ color: '#45b0e5' }} >Detalle profesor </h1>
+                        </div>
+                    </div>
+                    <div className="offset-1 col-10" style={{ paddingTop: '5%' }} >
+                        <div class="card" style={{width:'100%'}}>
+                            <img src={Personas} style={{width:'10%',alignSelf:'center'}} class="card-img-top" alt="..."/>
+                            {
+                                estadoInput == 1 ? 
+                                <div>
+                                <div class="card-body">
+                                <div className="form-group">
+                                <label>Nombre</label>
+                                <input value={Profesores[selectProfesor].nombre} disabled />
+                                <label>Apellido Paterno</label>
+                                <input value={Profesores[selectProfesor].apellido_paterno} disabled />
+                                <label>Apellido Materno</label>
+                                <input value={Profesores[selectProfesor].apellido_materno} disabled />
+                                </div>
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                
+                                <label style={{marginLeft:'1%'}}  >Asignatura: {}</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={Profesores[selectProfesor].asignatura} disabled />
+                                <li class="list-group-item"></li>
+                                <label style={{marginLeft:'1%'}}  class="card-title">Sueldo</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={Profesores[selectProfesor].sueldo} disabled />
+                                <li class="list-group-item"></li>
+                            </ul>
+                            <div className="card-body" style={{width:'100%',textAlign:'end'}}  >
+                                <button onClick={()=>setEstadoInput(0)} className="btn btn-success">Editar</button>
+                                <button style={{marginLeft:'2%'}} className="btn btn-danger">Eliminar</button>
+                            </div>
+                            </div>
+
+                                :
+
+                                <div>
+                                <div class="card-body">
+                                <div className="form-group">
+                                <label>Nombre</label>
+                                <input value={Profesores[selectProfesor].nombre}  />
+                                <label>Apellido Paterno</label>
+                                <input value={Profesores[selectProfesor].apellido_paterno}  />
+                                <label>Apellido Materno</label>
+                                <input value={Profesores[selectProfesor].apellido_materno}  />
+                                </div>
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                
+                                <label style={{marginLeft:'1%'}}  >Asignatura: {}</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={Profesores[selectProfesor].asignatura}  />
+                                <li class="list-group-item"></li>
+                                <label style={{marginLeft:'1%'}}  class="card-title">Sueldo</label>
+                                <input style={{width:'50%',marginLeft:'3%'}} value={Profesores[selectProfesor].sueldo}  />
+                                <li class="list-group-item"></li>
+                            </ul>
+                            <div className="card-body" style={{width:'100%',textAlign:'end'}}  >
+                                <button onClick={()=>setEstadoInput(0)} className="btn btn-success">Guardar</button>
+                                <button style={{marginLeft:'2%'}} className="btn btn-danger">Eliminar</button>
+                            </div>
+                            </div>
+                            }
                         </div>
                     </div>
 
