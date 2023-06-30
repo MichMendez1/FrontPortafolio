@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import EstudianteForm from './EstudianteForm';
 import EstudianteTable from './EstudianteTable';
 import URL from '../../Url';
+import { react } from '@babel/types';
 
 const EstudianteApp = () => {
   const [estudiantes, setEstudiantes] = useState([]);
   const [estudianteEdit, setEstudianteEdit] = useState(null);
+  const [vista,setVista]=useState(0)
 
   useEffect(() => {
     obtenerEstudiantes();
@@ -63,7 +65,10 @@ const EstudianteApp = () => {
   };
 
   const editarEstudiante = (estudiante) => {
+    
     setEstudianteEdit(estudiante);
+    console.log(estudiante);
+    setVista(1)
   };
 
   const cancelarEdicion = () => {
@@ -98,22 +103,37 @@ const EstudianteApp = () => {
     }
   };
 
-  return (
-    <div>
-      {estudianteEdit ? (
+  const Render0 =()=>{
+    if(vista == 1){
+      return(
+      <div>
+      {(
         <EstudianteForm
-          estudiante={estudianteEdit}
+          estudianteEdit={estudianteEdit}
           onSave={actualizarEstudiante}
           onCancel={cancelarEdicion}
         />
-      ) : (
-        <EstudianteForm onSave={guardarEstudiante} />
       )}
-      <EstudianteTable
+      
+    </div>)
+    }
+    else{
+      return(
+        <div>
+          <button className='btn btn-primary' onClick={()=>setVista(1)} >Registar</button>
+          <EstudianteTable
         estudiantes={estudiantes}
         onDelete={eliminarEstudiante}
         onEdit={editarEstudiante}
       />
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div>
+      <Render0></Render0>
     </div>
   );
 };
