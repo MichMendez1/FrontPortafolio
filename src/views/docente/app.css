@@ -17,7 +17,6 @@ body {
 	display: flex;
 	height: 100vh;
 	width: 100%;
-	/* background-color: #a6bff0; */
 	background-color: #f5f4f4;
 }
 
@@ -25,7 +24,6 @@ body {
 .contenido {
 	background-color: #f5f4f4;
 	width: 100%;
-	/* box-shadow: inset 0px 0px 20px #012b561b; */
 }
 
 .icon {
@@ -73,10 +71,6 @@ select, textarea {
 	padding-left: 0.3rem;
 }
 
-/* .btn-d-cabezara:hover {
-	color: #45b0e5;
-} */
-
 .btn-d:hover {
 	background-color: #45b0e5;
 	box-shadow: 1px 5px 10px 2px #00000033;
@@ -100,4 +94,10 @@ select, textarea {
 .btn-eliminar-d:active {
 	background-color: #F2B749;
 	color: #F2F2F2;
+}
+
+.caja-btn-especial{
+	position: absolute;
+	right: 4rem;
+	bottom: 2rem;
 }

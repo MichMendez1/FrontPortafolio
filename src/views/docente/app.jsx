@@ -6,6 +6,7 @@ import Buscador from "./components/buscador/Buscador"
 import CrearAnotacion from "./components/crearAnotacion/CrearAnotacion"
 import { useEffect, useState } from "react"
 import Sidebar from './components/sidebar/Sidebar';
+import baseUrl from '../Url.js'
 
 function App() {
 	const [listaAlumnos, setListaAlumno] = useState(null)
@@ -14,6 +15,7 @@ function App() {
 	const [useMostrarTabla, setMostrarTabla] = useState(false)
 	const [estadoModal, setEstadoModal] = useState(false)
 	const [anotaciones, setAnotaciones] = useState(null)
+	const [useanotaciones, setuseAnotaciones] = useState(null)
 	const [useTipoTabla, setTipoTabla] = useState('asistencia')
 	const [useTabla, setTabla] = useState(true)
 	const [useBuscador, setBuscador] = useState(true)
@@ -26,10 +28,12 @@ function App() {
 	const [useEventCrearAnotacion, setEventCrearAnotacion] = useState(true);    
 	const [useAsistenciaNota, setAsistenciaNota] = useState(true);    
 	const [useListaNotas, setListaNotas] = useState(true);    
-	const [useBuscarNotas, setBuscarNotas] = useState(true);    
+	const [useBuscarNotas, setBuscarNotas] = useState(false);    
+	const [useIdAlumno, setIdAlumno] = useState(false);    
+	   
 
 
-	const baseUrl="http://localhost:4000"
+	// const baseUrl="http://localhost:4000"
 
 	/* traer todos los cursos */
 	useEffect(() => {
@@ -108,6 +112,15 @@ function App() {
 	/* buscador de todo un curso de alumnos  */
 	const buscarCurso = (event) => {
         event.preventDefault()
+		setBuscarNotas(!useBuscarNotas)
+		let radio = document.querySelectorAll('input[type="radio"]')
+		radio.forEach(element => {
+			element.checked = false; 
+	   })
+	   let number = document.querySelectorAll('input[type="number"]')
+			number.forEach(element => {
+			element.value = null; 
+	   })
 		const cursoCompleto = []
 		const notasPorAlumno = []
 		let nota1 = 0
@@ -116,7 +129,6 @@ function App() {
         const datos = new FormData(event.target)
         const eleccion = datos.get('seleccionCurso')
         const curso = Alumnos.filter(alumno => alumno.cursoID === eleccion)
-        // console.log(curso) 
 		curso.forEach(c => {
 			let not = (useListaNotas.filter(
 				n => n.id_alumno === c._id
@@ -159,11 +171,13 @@ function App() {
         setMostrarTabla(true)
     }
 
+
     const buscarAnotaciones = (event) => {
         event.preventDefault()
 		setEventCrearAnotacion(event)
         const datos = new FormData(event.target)
         const eleccion = datos.get('seleccionAlumno') 
+		setIdAlumno(eleccion)
         const textos = (listaAnotaciones)
             ?listaAnotaciones.filter(anotacion => anotacion.id_alumno === eleccion)
             :""
@@ -177,8 +191,10 @@ function App() {
         setAnotaciones(textos) 
     }
 
+
 	  /* crear una anotacion */
-	const handleSubmitAnotaciones = () => {
+	const handleSubmitAnotaciones = event => {
+		event.preventDefault()
 		if (!useDatoAnotacion) return 
 		let dataAnotacion = {
 			anotacion:useDatoAnotacion, 
@@ -196,12 +212,27 @@ function App() {
 		.catch(error => console.error('Error:', error))
 		.then(setBuscarAnotacion(!useBuscarAnotacion))
 		.then(buscarAnotaciones(useEventCrearAnotacion))
+		document.getElementById("anotacion-textArea").value = "";
+		setDatoAnotacion(null)
+		setEstadoModal(!estadoModal)
 	}
+
+
+    const handleChangeAnotaciones = event =>{
+        event.preventDefault()
+        setDatoAnotacion(event.target.value) 
+    }
 
 	/* funcion para pasar lista o poner notas */
 	function handleSubmitAnotAsistencia(event) {
 		event.preventDefault()
+		setBuscarNotas(!useBuscarNotas)
 		const datosForm = new FormData(event.target)
+		let radio = document.querySelectorAll('input[type="radio"]')
+		radio.forEach(element => {
+			element.checked = false; 
+	   })
+
 		const formLength = Array.from(datosForm.keys()).length
 		const config = {
 			method: 'POST',
@@ -231,6 +262,7 @@ function App() {
 			fetch(`${baseUrl}/api/asistencia/pasar-lista`, config)
 			.then(res => res.json())
 			.then(listaDatos = '')
+			.then(setEstadoModal(!estadoModal))
 			.catch(error => console.error('Error:', error))
 
 		}
@@ -276,10 +308,26 @@ function App() {
 			fetch(`${baseUrl}/api/notas/actualizar-notas`, config)
 			.then(res => res.json())
 			.catch(error => console.error('Error:', error))
-
-
-			setBuscarNotas(!useBuscarNotas)
+			setEstadoModal(!estadoModal)
+			
+			// setBuscarNotas(!useBuscarNotas)
 		}
+	}
+
+	const  buscarAnotac = async () => {
+		const config = {
+			method: 'POST',
+			body: JSON.stringify({id:useIdAlumno}),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}
+		const response = await fetch(`${baseUrl}/api/anotaciones/traer-anotacion-filtradas`, config)
+		const textos = await response.json();
+		setAnotaciones(textos) 
+		setMostrarTabla(false)
+		setMostrarTabla(true)
+		setTabla(!useTabla)
 	}
 	
 
@@ -305,7 +353,7 @@ function App() {
 		if (pageActual === 'notas'){
 			setTipoTabla('notas')
 			setBuscador(true)
-			setAnotaciones(true)
+			setuseAnotaciones(true)
 			setTabla(true)
 			setCrearAnotacion(false)
 			setBuscarNotas(!useBuscarNotas)
@@ -313,7 +361,7 @@ function App() {
 		if (pageActual === 'asistencia'){
 			setTipoTabla('asistencia')
 			setBuscador(true)
-			setAnotaciones(true)
+			setuseAnotaciones(true)
 			setTabla(true)
 			setCrearAnotacion(false)
 		}
@@ -321,7 +369,7 @@ function App() {
 			setListaAlumno(null)
 			setTipoTabla('anotaciones')
 			setBuscador(false)
-			setAnotaciones(false)
+			setuseAnotaciones(false)
 			setTabla(false)
 			// setCrearAnotacion(true)
 		}
@@ -347,10 +395,8 @@ function App() {
 				<div className="caja-componente">
 					<CrearAnotacion
 						useCrearAnotacion={useCrearAnotacion}
-						modal={estadoModal}
-						setModal={setEstadoModal}
-						setDatoAnotacion={setDatoAnotacion}
-						handleSubmitAnotaciones={handleSubmitAnotaciones}>
+						handleSubmitAnotaciones={handleSubmitAnotaciones}
+						handleChangeAnotaciones={handleChangeAnotaciones}>
 					</CrearAnotacion>
 				</div>
 		
@@ -359,8 +405,6 @@ function App() {
 						listaAlumnos={listaAlumnos}
 						listaAnotaciones={anotaciones}
 						tipoTabla={useTipoTabla}
-						modal={estadoModal}
-						setModal={setEstadoModal}
 						useTabla={useTabla}
 						mostrarTabla={useMostrarTabla}
 						borraAnotacion={borraAnotacion}

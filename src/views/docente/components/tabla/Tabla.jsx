@@ -134,6 +134,7 @@ function tablaAlumno(listaAnotaciones, borraAnotacion){
 
 /* funcion principal */
 function Tabla({listaAlumnos, listaAnotaciones, tipoTabla, useTabla, mostrarTabla, borraAnotacion, setAsistenciaNota, handleSubmitAnotAsistencia}) {
+	
 	if (!mostrarTabla){
 		return <span>Lista....</span>
 	}else {
