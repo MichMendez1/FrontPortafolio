@@ -1,23 +1,21 @@
-.login{
-    margin-left: 0.5rem;
-    
-  }
-.login NavLink:hover{
-    color: #47ae6a;
+.navbar-color .nav-link {
+  color: #f8f9fa; 
 }
 
-  .postular button {
-    color: #ffffff;
-    background-color: #0071bc;
-    font-size: 25px;
-    border: 0px solid #2d63c8;
-    padding: 15px 50px;
-    cursor: pointer;
-    align-items: center;
-    border-radius: 3px;
-    
-  }
- .postular  button:hover {
-    color: #0071bc;
-    background-color: #ffffff;
-  }
+.nav-dropdown-color .dropdown-menu {
+  background-color: #f8f9fa; 
+}
+
+.container-color {
+  background-color: #012c56; 
+}
+
+.logo-container {
+  width: 80px;
+}
+
+.logo-image {
+  width: 100%;
+  height: auto;
+}
+

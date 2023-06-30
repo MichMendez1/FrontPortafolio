@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import EstudianteForm from './EstudianteForm';
 import EstudianteTable from './EstudianteTable';
 import URL from '../../Url';
+import { react } from '@babel/types';
 import Sidebar from '../components/Sidebar/Sidebar';
 import "../asistencia.scss"
 
@@ -65,7 +66,10 @@ const EstudianteApp = () => {
   };
 
   const editarEstudiante = (estudiante) => {
+    
     setEstudianteEdit(estudiante);
+    console.log(estudiante);
+
   };
 
   const cancelarEdicion = () => {

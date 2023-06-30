@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer, CDBSelect } from 'cdbreact';
 import { validarRut } from './rutUtils';
 
-const EstudianteForm = ({ onSave, estudianteEdit }) => {
+const EstudianteForm = ({ estudianteEdit, onSave  }) => {
   const option = [
     {
       text: 'Femenino',
@@ -13,6 +13,7 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
       value: '2',
     }
   ];
+  const [Alumno,setAlumno]=useState(null)
 
   const [errors, setErrors] = useState([]);
   const [alumnoID, setAlumnoID] = useState('');
@@ -31,23 +32,11 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
   const [tipo, setTipo] = useState('Estudiante');
 
   useEffect(() => {
-    if (estudianteEdit) {
-      setAlumnoID(estudianteEdit.alumnoID || '');
-      setCursoID(estudianteEdit.cursoID || '');
-      setNombres(estudianteEdit.nombres || '');
-      setApellidoPaterno(estudianteEdit.apellido_paterno || '');
-      setApellidoMaterno(estudianteEdit.apellido_materno || '');
-      setFechaNacimiento(estudianteEdit.fecha_nacimiento || '');
-      setNacionalidad(estudianteEdit.nacionalidad || '');
-      setDireccion(estudianteEdit.direccion || '');
-      setEmail(estudianteEdit.email || '');
-      setPassword(estudianteEdit.password || '');
-      setGenero(estudianteEdit.genero || '');
-      setRut(estudianteEdit.rut || '');
-      setTelefono(estudianteEdit.telefono || '');
-      setTipo(estudianteEdit.tipo || 'Estudiante');
-    }
-  }, [estudianteEdit]);
+    
+    estudianteEdit ? setAlumno(estudianteEdit) : setAlumno(null);
+    console.log("hola");
+    
+  });
 
 
   const handleSubmit = (e) => {
@@ -213,12 +202,21 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
             <label htmlFor="defaultRegisterNacionalidad" className="text-muted m-0">
               Nacionalidad
             </label>
-            <CDBInput
-              value={nacionalidad}
+            {Alumno != null ? <CDBInput
+              name="editNacionalidad"
+              value={Alumno.nacionalidad}
               onChange={(e) => setNacionalidad(e.target.value)}
               className="mt-n3"
               type="text"
-            />
+            /> :
+            <CDBInput
+              value=''
+              onChange={(e) => setNacionalidad(e.target.value)}
+              className="mt-n3"
+              name="Nacionalidad"
+              type="text"
+            />}
+            
             <label htmlFor="defaultRegisterDireccion" className="text-muted m-0">
               Dirección
             </label>
