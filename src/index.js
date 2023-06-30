@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
+import Director from './views/director/director';
+import Poc from './views/test/Poc';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './views/login';
+import Login from './views/login/login';
 import UserPage from './views/Asistente/AdministracionEstudiantes';
 import Perfil from './views/Perfil/Perfil';
 import Navbar from './views/SideBar/SideBar';
@@ -31,26 +33,26 @@ import NavNolog from './views/NavNolog/NavNolog';
 import CrudProfesores from './views/Asistente/AdministracionProfesores';
 import ProfesoresPage from './views/NuestroEquipo/NuestroEquipo';
 import Horarios from './views/Horario/horario';
-import Student from './views/Student/Student';
 import 'bootstrap/scss/bootstrap.scss'
-import Asistencia from "./views/Student/pages/Asistencia"
-import Notas from './views/Student/pages/Notas';
-import Anotaciones from './views/Student/pages/Anotaciones';
-
+import Estudiante from './views/estudiante/Estudiante';
+import Asistencia from './views/estudiante/pages/Asistencia';
+import Notas from './views/estudiante/pages/Notas';
+import PerfilEst from './views/estudiante/pages/Perfil';
+import EstudianteApp from "./views/Asistente/admEstudiante/EstudianteApp"
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-   const { Name, Email, Role } = user || {};         
-  const isLoggedIn = user;
+const { Name, Email, Role } = user || {};
+const isLoggedIn = user;
 
 const AppWithSidebar = () => (
 
   <div>
-    {isLoggedIn ? <Navbar /> : <NavNolog />}
+     {/* {isLoggedIn ? <Navbar /> : <NavNolog />}   */}
 
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login/>} />
       {user && user.Role === 'Admin' && (
         <Route path="/registro" element={<RegistrationPage />} />
       )}
@@ -62,7 +64,7 @@ const AppWithSidebar = () => (
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/registro" element={<RegistroEstudiante />} />
-      <Route path="/admEstudiantes" element={<CrudEstudiantes />} />
+      <Route path="/admEstudiantes" element={<EstudianteApp />}/>
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/admApoderados" element={<CrudApoderados />} />
@@ -71,11 +73,11 @@ const AppWithSidebar = () => (
       <Route path="/admProfesores" element={<CrudProfesores />} />
       <Route path="/horarios" element={<Horarios />} />
 
-      <Route path="student">
-            <Route index element={<Student/>} />
-            <Route path= '/student/asistencia' element={<Asistencia/>}/>
-            <Route path='/student/notas' element={<Notas/>} />
-            <Route path='/student/anotaciones' element={<Anotaciones/>} />
+      <Route path='estudiante'>
+        <Route index element={<Estudiante />} />
+        <Route path='/estudiante/asistencia' element={<Asistencia />} />
+        <Route path='/estudiante/notas' element={<Notas />} />
+        <Route path='/estudiante/perfil' element={<PerfilEst />} />  
       </Route>
 
       <Route path="/administrador" element={<Administrador />} />
@@ -87,9 +89,12 @@ const AppWithSidebar = () => (
       <Route path="/registerteacher" element={<RegisterTeacher />} />
       <Route path="/editworker" element={<EditWorker />} />
       <Route path="/headers" element={<Headers />} />
-      <Route path="/userprofile/:id" element={<Profile/>} />
+      <Route path="/userprofile/:id" element={<Profile />} />
       {/*     <Route path="/edit/:id" element={<Edit />} />
        */}
+
+      <Route path='/director' element={<Director />} />
+      <Route path='/poc' element={<Poc />} />
 
     </Routes>
   </div>
