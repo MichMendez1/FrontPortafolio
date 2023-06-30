@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SidebarAdm from './components/Sidebar/SidebarAdm';
-import Footer from './components/Footer/Footer';
 
 
 function App () {
@@ -9,7 +8,6 @@ function App () {
     <>
 
     <SidebarAdm/>
-    <Footer/>
 
     </>
   );

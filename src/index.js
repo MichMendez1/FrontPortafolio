@@ -28,13 +28,16 @@ import Register from './views/Administrador/Pages/Register/Register';
 import RegistroColegio from './views/Administrador/Pages/Register/RegistroColegio';
 import EditarColegio from './views/Administrador/Pages/Edit/EditarColegio';
 import Colegio from './views/Administrador/Pages/HomeAD/Colegio';
-import Perfils from './views/Administrador/Pages/Perfil/Perfils';
-import Registrar from './views/Administrador/Pages/HomeAD/Registrar';
-import Poc from './views/test/Poc';
+import PerfilAdm from './views/Administrador/Pages/Perfil/PerfilAdm';
+import RegistrarFecha from './views/Administrador/Pages/HomeAD/RegistrarFecha';
+import RegistrarDia from './views/Administrador/Pages/Register/Registrar_Dia/RegistrarDia';
+import RegistrarAnno from './views/Administrador/Pages/Register/RegistrarAnno';
 import RegistrarAsignatura from './views/Administrador/Pages/Register/RegistrarAsignatura';
 import RegistrarTrabajo from './views/Administrador/Pages/Register/RegistrarTrabajo';
 import RegistrarSala from './views/Administrador/Pages/Register/RegistrarSala';
-//import RegistrarDirector from './views/Administrador/Pages/Register/RegistrarSostenedor';
+import RegistrarPersonal from './views/Administrador/Pages/HomeAD/RegistrarPersonal';
+import RegistrarColegio from './views/Administrador/Pages/HomeAD/RegistrarColegio';
+import RegistrarHorario from './views/Administrador/Pages/HomeAD/RegistrarHorario';
 import RegistrarSostenedor from './views/Administrador/Pages/Register/RegistrarSostenedor';
 
 import RegistroEstudiante from './views/Registro/RegistroEstudiante';
@@ -104,13 +107,20 @@ const AppWithSidebar = () => (
       <Route path="/registrocolegio" element={<RegistroColegio />} />
       <Route path="/editarcolegio:/id" element={<EditarColegio />} />
       <Route path="/colegio" element={<Colegio />} />
-      <Route path="/perfils" element={<Perfils />} />
-      <Route path="/registrar" element={<Registrar />} />
+      <Route path="/perfiladm" element={<PerfilAdm />} />
+      <Route path="/registrarfecha" element={<RegistrarFecha />} />
+      <Route path="/registrardia" element={<RegistrarDia />} />
+      <Route path="/registraranno" element={<RegistrarAnno />} />
+
+
       <Route path="/registrarasignatura" element={<RegistrarAsignatura />} />
       <Route path="/registrartrabajo" element={<RegistrarTrabajo />} />
       <Route path="/registrarsala" element={<RegistrarSala />} />
       {/*   <Route path="/registrardirector" element={<RegistrarDirector />} /> */}
       <Route path="/registrarsostenedor" element={<RegistrarSostenedor />} />
+      <Route path="/registrarpersonal" element={<RegistrarPersonal />} />
+      <Route path="/registrarcolegio" element={<RegistrarColegio />} />
+      <Route path="/registrarhorario" element={<RegistrarHorario />} />
 
       <Route path="/registerteacher" element={<RegisterTeacher />} />
       <Route path="/editworker" element={<EditWorker />} />
