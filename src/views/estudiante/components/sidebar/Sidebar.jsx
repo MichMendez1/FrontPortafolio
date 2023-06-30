@@ -32,11 +32,11 @@ const Sidebar = () => {
             <NavLink exact to="/asistente" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admEstudiantes" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="check-circle">Administración Estudiantes</CDBSidebarMenuItem>
+            <NavLink exact to="/estudiante/asistencia" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="check-circle">Asistencia</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admProfesores" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Administración Profesores</CDBSidebarMenuItem>
+            <NavLink exact to="/estudiante/notas" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Notas</CDBSidebarMenuItem>
             </NavLink>
              <NavLink exact to="/estudiante/perfil" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Perfil</CDBSidebarMenuItem>
