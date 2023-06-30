@@ -5,7 +5,7 @@ import App from './App';
 import Director from './views/director/director';
 import Poc from './views/test/Poc';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './views/login';
+import Login from './views/login/login';
 import UserPage from './views/Asistente/AdministracionEstudiantes';
 import Perfil from './views/Perfil/Perfil';
 import Navbar from './views/SideBar/SideBar';
@@ -37,7 +37,7 @@ import 'bootstrap/scss/bootstrap.scss'
 import Estudiante from './views/estudiante/Estudiante';
 import Asistencia from './views/estudiante/pages/Asistencia';
 import Notas from './views/estudiante/pages/Notas';
-import PerfilEst from './views/estudiante/pages/Perfil';
+import PerfilEst from './views/estudiante/pages/PerfilEst';
 import EstudianteApp from "./views/Asistente/admEstudiante/EstudianteApp"
 
 
@@ -52,7 +52,7 @@ const AppWithSidebar = () => (
 
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login/>} />
       {user && user.Role === 'Admin' && (
         <Route path="/registro" element={<RegistrationPage />} />
       )}

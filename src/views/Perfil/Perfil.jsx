@@ -5,7 +5,7 @@ import BackgroundImage from "../../img/bg-patterns.png";
 
 const Perfil = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
-  const { nombres, apellido_paterno, Apellido_Materno, email, Direccion, Tipo, UrlFoto, CursoID } = user || {}
+  const { nombres, apellido_paterno, apellido_materno, email, direccion, tipo, UrlFoto, cursoID } = user || {}
 
   return (
     <div className="background-container">
@@ -16,9 +16,9 @@ const Perfil = () => {
             alt="Profile"
             className="perfil-foto"
           />
-          <h3 className="perfil-nombre">{nombres} {apellido_paterno} {Apellido_Materno}</h3>
-          <p className="perfil-tipo">{Tipo}</p>
-          <p className="perfil-tipo"> ID Curso: {CursoID}</p>
+          <h3 className="perfil-nombre">{nombres} {apellido_paterno} {apellido_materno}</h3>
+          <p className="perfil-tipo">{tipo}</p>
+          <p className="perfil-tipo"> ID Curso: {cursoID}</p>
         </div>
         <div className="perfil-body">
           <div className="row">
@@ -44,7 +44,7 @@ const Perfil = () => {
               </p>
               <p className="perfil-contacto">
                 <strong>Direccion:</strong> 
-                <a> {Direccion} </a>
+                <a> {direccion} </a>
               </p>
             </div>
           </div>

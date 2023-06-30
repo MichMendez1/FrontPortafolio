@@ -12,8 +12,14 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from "./Nuevos Horizontes.png";
 
 const Sidebar = () => {
+  const handleLogout=()=>{
+    sessionStorage.removeItem('user');
+    window.location.href="/login"
+
+  }
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+      
       <CDBSidebar textColor="#fff" backgroundColor="#012c56">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
@@ -35,7 +41,7 @@ const Sidebar = () => {
              <NavLink exact to="/estudiante/perfil" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Perfil</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink onClick={handleLogout} activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="power-off">Cerrar Sesión</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

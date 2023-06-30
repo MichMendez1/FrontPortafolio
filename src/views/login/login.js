@@ -1,72 +1,117 @@
-import React, { Fragment, useEffect, useState } from "react";
-import './login.css'
-import Logo from '../../img/Logo.png'
+import "./login.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBIcon,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
+import URL from '../Url'
+
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const [datos, setDatos] = useState({
-        Email: '',
-        Password: ''
-    })
+  const navigate = useNavigate();
 
-    const url = 'http://localhost:3000/';
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-
-    const handleInputChange = (e) => {
-        setDatos({
-            ...datos,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const fetchTest = async () => {
-        console.log(JSON.stringify(datos));
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(datos),
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-            console.log(response);
-            const json = await response.json();
-            console.log(json);
-            alert('Felicidades iniciaste sesion')
-        } catch (error) {
-            console.log('error', error);
-            alert('Lo siento no hubo un error en el usuario o la contraseña')
+    try {
+      const response = await fetch(
+        URL+"/api/estudiantes/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
         }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Autenticación exitosa");
+        console.log("Token:", data.token);
+        setError("");
+
+        // Guardar usuario en sessionStorage
+        sessionStorage.setItem("user", JSON.stringify(data));
+        console.log(data.nombres); // Acceder al atributo 'nombres' del usuario
+        console.log(data.tipo);
+        // Redireccionar a la página deseada
+        navigate("/estudiante");
+      } else {
+        console.log("Autenticación fallida");
+        console.log("Mensaje de error:", data.msg);
+        setError(data.msg);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      setError("Ocurrió un error en el servidor");
     }
+  };
 
-    return (
-        <Fragment>
-            <div className="Background" style={{ paddingTop: '13%' }} >
-                <div class="offset-7 col-4 card" >
-                    <img className="offset-3" style={{ width: '50%' }} src={Logo} />
-                    <div class="card-body">
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" onChange={handleInputChange} name='Email' id="inputEmail" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" name="Password" onChange={handleInputChange} class="form-control" id="inputPassword" />
-                            </div>
-                        </div>
-                    </div>
-                    <button className="btn btn-primary offset-7" onClick={fetchTest} style={{ marginBottom: '2%', marginRight: '3%' }} >Iniciar Sesion </button>
-                </div>
+  return (
+    <div>
+      <MDBContainer fluid className="p-3 my-5">
+        <MDBRow>
+          <MDBCol col="10" md="6">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+              class="img-fluid"
+              alt="Phone image"
+            />
+          </MDBCol>
 
-            </div>
+          <MDBCol col="4" md="6">
+            <form onSubmit={handleSubmit}>
+              <MDBInput
+                wrapperClass="mb-4"
+                label="Ingrese su Correo electrónico"
+                type="email"
+                placeholder="Correo electrónico"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
+              <MDBInput
+                wrapperClass="mb-4"
 
+                  label="Ingrese su Contraseña"
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+              />
 
-        </Fragment>
-    )
-}
+              <div className="d-flex justify-content-between mx-4 mb-4">
+                <MDBCheckbox
+                  name="flexCheck"
+                  value=""
+                  id="flexCheckDefault"
+                  label="Recordarme"
+                />
+              </div>
 
-export default Login
+              <MDBBtn className="mb-4 w-100" size="lg">
+                Ingresar
+              </MDBBtn>
+            </form>
+            {error && <p>{error}</p>}
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </div>
+  );
+};
+
+export default Login;
