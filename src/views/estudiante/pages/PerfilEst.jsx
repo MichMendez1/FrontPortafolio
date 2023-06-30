@@ -1,40 +1,74 @@
-import React from 'react';
-import Sidebar from '../components/sidebar/Sidebar';
-import Card from 'react-bootstrap/Card';
-import './perfil.scss';
+import "./perfil.scss"
+import Sidebar from '../components/sidebar/Sidebar'
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
 const PerfilEst = () => {
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  const { nombres, apellido_paterno, apellido_materno, email, direccion,telefono, tipo,genero, cursoID } = user || {}
   return (
-    <div className="notas-container">
-      <Sidebar />
-        <div className="perfil-container">
-          <div className="perfil-header">
-            <h3 className="perfil-nombre">Nombre</h3>
-            <p className="perfil-tipo">Tipo</p>
-            <p className="perfil-tipo">ID Curso:</p>
-          </div>
-          <div className="perfil-body">
-            <div className="row">
-              <div className="col-md-6">
-                <h4>Datos de contacto</h4>
-                <p className="perfil-info">
-                  <p className="perfil-contacto">
-                    <strong>Email:</strong> <a>email</a>
-                  </p>
-                  <p className="perfil-contacto">
-                  <strong>Celular:</strong> +569 45667890
-                </p>
-                <p className="perfil-contacto">
-                  <strong>Dirección:</strong>
-                </p>                
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-  );
-};
+    <div>
+      
+      
+      <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
+      <MDBRow className="justify-content-center align-items-center h-100">
+      <Sidebar/>
+      </MDBRow>
+      <MDBContainer className="py-5 h-100">
+        <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBCol lg="6" className="mb-4 mb-lg-0">
+            <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
+              <MDBRow className="g-0">
+                <MDBCol md="4" className="gradient-custom text-center text-white"
+                  style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
+                  <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
+                  <MDBTypography tag="h5">{nombres} {apellido_paterno} {apellido_materno}</MDBTypography>
+                  <MDBCardText>{tipo}</MDBCardText>
+                  <MDBIcon far icon="edit mb-5" />
+                </MDBCol>
+                <MDBCol md="8">
+                  <MDBCardBody className="p-4">
+                  <MDBTypography tag="h6">Información personal</MDBTypography>
+                    <hr className="mt-0 mb-4" />
+                    <MDBRow className="pt-1">
+                      <MDBCol size="6" className="mb-3">
+                        <MDBTypography tag="h6">Género</MDBTypography>
+                        <MDBCardText className="text-muted">{genero}</MDBCardText>
+                      </MDBCol>
+                      <MDBCol size="6" className="mb-3">
+                        <MDBTypography tag="h6">Codigo de Curso</MDBTypography>
+                        <MDBCardText className="text-muted">{cursoID}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBTypography tag="h6">Información de contacto</MDBTypography>
+                    <hr className="mt-0 mb-4" />
+                    <MDBRow className="pt-1">
+                      <MDBCol size="6" className="mb-3">
+                        <MDBTypography tag="h6">Email</MDBTypography>
+                        <MDBCardText className="text-muted">{email}</MDBCardText>
+                      </MDBCol>
+                      <MDBCol size="6" className="mb-3">
+                        <MDBTypography tag="h6">Teléfono</MDBTypography>
+                        <MDBCardText className="text-muted">{telefono}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
 
-export default PerfilEst;
+                    
+
+                    <div className="d-flex justify-content-start">
+                      <a href="#!"><MDBIcon fab icon="facebook me-3" size="lg" /></a>
+                      <a href="#!"><MDBIcon fab icon="twitter me-3" size="lg" /></a>
+                      <a href="#!"><MDBIcon fab icon="instagram me-3" size="lg" /></a>
+                    </div>
+                  </MDBCardBody>
+                </MDBCol>
+              </MDBRow>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </section>
+    </div>
+  )
+}
+export default PerfilEst
