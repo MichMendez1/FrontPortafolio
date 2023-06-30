@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer, CDBSelect } from 'cdbreact';
 import { validarRut } from './rutUtils';
 
-const EstudianteForm = ({ onSave }) => {
+const EstudianteForm = ({ estudianteEdit, onSave  }) => {
   const option = [
     {
       text: 'Femenino',
@@ -13,6 +13,7 @@ const EstudianteForm = ({ onSave }) => {
       value: '2',
     }
   ];
+  const [Alumno,setAlumno]=useState(null)
 
   const [errors, setErrors] = useState([]);
   const [alumnoID, setAlumnoID] = useState('');
@@ -29,6 +30,14 @@ const EstudianteForm = ({ onSave }) => {
   const [rut, setRut] = useState('');
   const [telefono, setTelefono] = useState('');
   const [tipo, setTipo] = useState('Estudiante');
+
+  useEffect(() => {
+    
+    estudianteEdit ? setAlumno(estudianteEdit) : setAlumno(null);
+    console.log("hola");
+    
+  });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +111,16 @@ const EstudianteForm = ({ onSave }) => {
         tipo,
       };
 
-      onSave(estudiante);
+      
+      if (estudianteEdit && estudianteEdit._id) {
+        // Actualizar estudiante existente
+        estudiante._id = estudianteEdit._id;
+        onSave(estudiante);
+      } else {
+        // Guardar nuevo estudiante
+        onSave(estudiante);
+      }
+
       // Mostrar mensaje de éxito o redireccionar
       alert('Estudiante registrado exitosamente');
     }
@@ -184,12 +202,21 @@ const EstudianteForm = ({ onSave }) => {
             <label htmlFor="defaultRegisterNacionalidad" className="text-muted m-0">
               Nacionalidad
             </label>
-            <CDBInput
-              value={nacionalidad}
+            {Alumno != null ? <CDBInput
+              name="editNacionalidad"
+              value={Alumno.nacionalidad}
               onChange={(e) => setNacionalidad(e.target.value)}
               className="mt-n3"
               type="text"
-            />
+            /> :
+            <CDBInput
+              value=''
+              onChange={(e) => setNacionalidad(e.target.value)}
+              className="mt-n3"
+              name="Nacionalidad"
+              type="text"
+            />}
+            
             <label htmlFor="defaultRegisterDireccion" className="text-muted m-0">
               Dirección
             </label>

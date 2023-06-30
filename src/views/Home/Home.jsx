@@ -6,9 +6,13 @@ import img4 from '../../img/libro.png'
 import img2 from '../../img/colores.png'
 import img1 from '../../img/cerebro.png'
 import img3 from '../../img/estudio.png'
+import NavNolog from '../NavNolog/NavNolog'
+
+
 const HomePage = () => {
   return (
     <div className="homepage">
+      <NavNolog/>
       <div className="banner">
         <h1>Admisión 2024</h1>
         <h3>

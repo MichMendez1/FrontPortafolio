@@ -11,6 +11,7 @@ import {
 const EstudianteTable = ({ estudiantes, onDelete, onEdit }) => {
   return (
     <CDBContainer>
+      
       <CDBTable responsive>
         <CDBTableHeader>
           <tr>
