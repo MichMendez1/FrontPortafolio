@@ -26,11 +26,10 @@ import Profile from './views/Administrador/Pages/Profile/Profile';
 import EditWorker from './views/Administrador/Pages/Edit/EditWorker';
 import RegisterTeacher from './views/Administrador/Pages/Register/RegisterTeacher';
 import RegistroEstudiante from './views/Registro/RegistroEstudiante';
-import CrudEstudiantes from './views/Asistente/AdministracionEstudiantes';
-import CrudApoderados from './views/Asistente/AdministracionApoderados';
+import AdminPage from './views/Asistente/AsistenteHome';
 import AboutPage from './views/About/sobreNosotros';
 import NavNolog from './views/NavNolog/NavNolog';
-import CrudProfesores from './views/Asistente/AdministracionProfesores';
+
 import ProfesoresPage from './views/NuestroEquipo/NuestroEquipo';
 import Horarios from './views/Horario/horario';
 import 'bootstrap/scss/bootstrap.scss'
@@ -39,38 +38,40 @@ import Asistencia from './views/estudiante/pages/Asistencia';
 import Notas from './views/estudiante/pages/Notas';
 import PerfilEst from './views/estudiante/pages/PerfilEst';
 import EstudianteApp from "./views/Asistente/admEstudiante/EstudianteApp"
+import ProfesorApp from './views/Asistente/admProfesor/ProfesorApp';
+import PerfilAsist from './views/Asistente/PerfilASIST';
 
 
 const user = JSON.parse(sessionStorage.getItem('user'));
-const { Name, Email, Role } = user || {};
-const isLoggedIn = user;
+const { tipo} = user || {};
+
 
 const AppWithSidebar = () => (
+
 
   <div>
      {/* {isLoggedIn ? <Navbar /> : <NavNolog />}   */}
 
     <Routes>
+
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login/>} />
       {user && user.Role === 'Admin' && (
         <Route path="/registro" element={<RegistrationPage />} />
       )}
-      {user && user.Role === 'Admin' && (
-        <Route path="/asistenteadm" element={<UserPage />} />
-      )}
+ 
 
-      <Route path="/perfil" element={<Perfil />} />
+
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
+      <Route path="/homeAsistente" element={<AdminPage />} />
       <Route path="/registro" element={<RegistroEstudiante />} />
       <Route path="/admEstudiantes" element={<EstudianteApp />}/>
-      <Route path="/perfil" element={<Perfil />} />
+      <Route path="/perfilasistente" element={<PerfilAsist/>}/>
       <Route path="/docente" element={<Docente />} />
-      <Route path="/admApoderados" element={<CrudApoderados />} />
       <Route path="/nosotros" element={<AboutPage />} />
       <Route path="/Equipo" element={<ProfesoresPage />} />
-      <Route path="/admProfesores" element={<CrudProfesores />} />
+      <Route path="/admProfesores" element={<ProfesorApp/>} />
       <Route path="/horarios" element={<Horarios />} />
 
       <Route path='estudiante'>

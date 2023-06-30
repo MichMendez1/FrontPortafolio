@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer, CDBSelect } from 'cdbreact';
 import { validarRut } from './rutUtils';
 
-const EstudianteForm = ({ onSave, estudianteEdit }) => {
+const ProfesorForm = ({ onSave, profesorEdit }) => {
   const option = [
     {
       text: 'Femenino',
@@ -13,9 +13,11 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
       value: '2',
     }
   ];
-
+  const [emailError, setEmailError] = useState(false);
+  const [confirmRegister, setConfirmRegister] = useState(false);
+  
   const [errors, setErrors] = useState([]);
-  const [alumnoID, setAlumnoID] = useState('');
+  const [profesorID, setProfesorID] = useState('');
   const [cursoID, setCursoID] = useState('');
   const [nombres, setNombres] = useState('');
   const [apellido_paterno, setApellidoPaterno] = useState('');
@@ -28,26 +30,28 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
   const [genero, setGenero] = useState('');
   const [rut, setRut] = useState('');
   const [telefono, setTelefono] = useState('');
-  const [tipo, setTipo] = useState('Estudiante');
+  const [asignatura, setAsignatura] = useState('');
+  const [tipo, setTipo] = useState('Profesor');
 
   useEffect(() => {
-    if (estudianteEdit) {
-      setAlumnoID(estudianteEdit.alumnoID || '');
-      setCursoID(estudianteEdit.cursoID || '');
-      setNombres(estudianteEdit.nombres || '');
-      setApellidoPaterno(estudianteEdit.apellido_paterno || '');
-      setApellidoMaterno(estudianteEdit.apellido_materno || '');
-      setFechaNacimiento(estudianteEdit.fecha_nacimiento || '');
-      setNacionalidad(estudianteEdit.nacionalidad || '');
-      setDireccion(estudianteEdit.direccion || '');
-      setEmail(estudianteEdit.email || '');
-      setPassword(estudianteEdit.password || '');
-      setGenero(estudianteEdit.genero || '');
-      setRut(estudianteEdit.rut || '');
-      setTelefono(estudianteEdit.telefono || '');
-      setTipo(estudianteEdit.tipo || 'Estudiante');
+    if (profesorEdit) {
+      setProfesorID(profesorEdit.profesorID || '');
+      setCursoID(profesorEdit.cursoID || '');
+      setNombres(profesorEdit.nombres || '');
+      setApellidoPaterno(profesorEdit.apellido_paterno || '');
+      setApellidoMaterno(profesorEdit.apellido_materno || '');
+      setFechaNacimiento(profesorEdit.fecha_nacimiento || '');
+      setNacionalidad(profesorEdit.nacionalidad || '');
+      setDireccion(profesorEdit.direccion || '');
+      setEmail(profesorEdit.email || '');
+      setPassword(profesorEdit.password || '');
+      setGenero(profesorEdit.genero || '');
+      setRut(profesorEdit.rut || '');
+      setTelefono(profesorEdit.telefono || '');
+      setAsignatura(profesorEdit.asinatura || '');
+      setTipo(profesorEdit.tipo || 'Profesor');
     }
-  }, [estudianteEdit]);
+  }, [profesorEdit]);
 
 
   const handleSubmit = (e) => {
@@ -98,15 +102,17 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
     if (!telefono) {
       validationErrors.push('El campo Teléfono es requerido.');
     }
-
+    if (!asignatura) {
+      validationErrors.push('El campo Asignatura es requerido.');
+    }
     setErrors(validationErrors);
     if (!validarRut(rut)) {
       validationErrors.push('El RUT no es Válido');
     }
 
     if (validationErrors.length === 0) {
-      const estudiante = {
-        alumnoID,
+      const profesor = {
+        profesorID,
         cursoID,
         nombres,
         apellido_paterno,
@@ -119,21 +125,22 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
         genero,
         rut,
         telefono,
+        asignatura,
         tipo,
       };
 
       
-      if (estudianteEdit && estudianteEdit._id) {
-        // Actualizar estudiante existente
-        estudiante._id = estudianteEdit._id;
-        onSave(estudiante);
+      if (profesorEdit && profesorEdit._id) {
+        // Actualizar profesor existente
+        profesor._id = profesorEdit._id;
+        onSave(profesor);
       } else {
-        // Guardar nuevo estudiante
-        onSave(estudiante);
+        // Guardar nuevo profesor
+        onSave(profesor);
       }
 
       // Mostrar mensaje de éxito o redireccionar
-      alert('Estudiante registrado exitosamente');
+      alert('Profesor registrado exitosamente');
     }
   };
 
@@ -145,7 +152,7 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
         <CDBCardBody className="mx-4">
           <form onSubmit={handleSubmit}>
             <div className="text-center mt-4 mb-2">
-              <p className="h4">Administración de Alumnos</p>
+              <p className="h4">Administración de Profesores</p>
             </div>
             {errors.length > 0 && (
               <div className="alert alert-danger">
@@ -157,11 +164,11 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
               </div>
             )}
             <label htmlFor="defaultRegisterCurso" className="text-muted m-0">
-              ID Alumno
+              ID Profesor
             </label>
             <CDBInput
-              value={alumnoID}
-              onChange={(e) => setAlumnoID(e.target.value)}
+              value={profesorID}
+              onChange={(e) => setProfesorID(e.target.value)}
               className="mt-n3"
               type="text"
             />
@@ -271,6 +278,15 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
               Teléfono
             </label>
             <CDBInput
+              value={asignatura}
+              onChange={(e) => setAsignatura(e.target.value)}
+              className="mt-n3"
+              type="text"
+            />
+            <label htmlFor="defaultRegisterasignatura" className="text-muted m-0">
+              Asignatura
+            </label>
+              <CDBInput
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               className="mt-n3"
@@ -291,4 +307,4 @@ const EstudianteForm = ({ onSave, estudianteEdit }) => {
   );
 };
 
-export default EstudianteForm;
+export default ProfesorForm;

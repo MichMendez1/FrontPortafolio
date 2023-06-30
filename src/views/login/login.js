@@ -1,6 +1,7 @@
 import "./login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Container, Row, Col } from "react-bootstrap";
 import {
   MDBBtn,
   MDBContainer,
@@ -10,52 +11,31 @@ import {
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
-import URL from '../Url'
-
+import LoginEstudiante from "./TiposUsuario/loginEstudiante";
+import LoginProfesor from "./TiposUsuario/loginProfesor";
+import LoginAsistente from "./TiposUsuario/loginAsistente";
+import LoginDirector from "./TiposUsuario/loginDirector";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [opcionSeleccionada, setOpcionSeleccionada] = useState("");
+  const [componenteRenderizado, setComponenteRenderizado] = useState(null);
 
-  const navigate = useNavigate();
+  // Función para manejar el cambio de selección
+  const handleSeleccionChange = (event) => {
+    const opcion = event.target.value;
+    setOpcionSeleccionada(opcion);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await fetch(
-        URL+"/api/estudiantes/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Autenticación exitosa");
-        console.log("Token:", data.token);
-        setError("");
-
-        // Guardar usuario en sessionStorage
-        sessionStorage.setItem("user", JSON.stringify(data));
-        console.log(data.nombres); // Acceder al atributo 'nombres' del usuario
-        console.log(data.tipo);
-        // Redireccionar a la página deseada
-        navigate("/estudiante");
-      } else {
-        console.log("Autenticación fallida");
-        console.log("Mensaje de error:", data.msg);
-        setError(data.msg);
-      }
-    } catch (error) {
-      console.log("Error:", error);
-      setError("Ocurrió un error en el servidor");
+    // Renderizar el componente correspondiente a la opción seleccionada
+    if (opcion === "estudiante") {
+      setComponenteRenderizado(<LoginEstudiante />);
+    } else if (opcion === "Profesor") {
+      setComponenteRenderizado(<LoginProfesor />);
+    } else if (opcion === "Asistente") {
+      setComponenteRenderizado(<LoginAsistente />);
+    } else if (opcion === "Director") {
+      setComponenteRenderizado(<LoginDirector />);
+    } else {
+      setComponenteRenderizado(null);
     }
   };
 
@@ -72,41 +52,29 @@ const Login = () => {
           </MDBCol>
 
           <MDBCol col="4" md="6">
-            <form onSubmit={handleSubmit}>
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Ingrese su Correo electrónico"
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-
-                  label="Ingrese su Contraseña"
-                  type="password"
-                  placeholder="Contraseña"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required
-              />
-
-              <div className="d-flex justify-content-between mx-4 mb-4">
-                <MDBCheckbox
-                  name="flexCheck"
-                  value=""
-                  id="flexCheckDefault"
-                  label="Recordarme"
-                />
+            <div>
+            <Container>
+      <Row>
+        <Col>
+          <h1 className="text-center">Bienvenido a Nuevos Horizontes</h1>
+        </Col>
+      </Row>
+    </Container>
+              <div className="d-flex justify-content-center">
+                <Form.Select
+                  value={opcionSeleccionada}
+                  onChange={handleSeleccionChange}
+                >
+                  <option value="">Seleccionar Tipo de Usuario</option>
+                  <option value="estudiante">Estudiante</option>
+                  <option value="Profesor">Profesor</option>
+                  <option value="Asistente">Asistente</option>
+                  <option value="Director">Director</option>
+                </Form.Select>
               </div>
-
-              <MDBBtn className="mb-4 w-100" size="lg">
-                Ingresar
-              </MDBBtn>
-            </form>
-            {error && <p>{error}</p>}
+              {/* Renderizar el componente seleccionado */}
+              {componenteRenderizado}
+            </div>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

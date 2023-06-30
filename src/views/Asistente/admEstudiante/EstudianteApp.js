@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import EstudianteForm from './EstudianteForm';
 import EstudianteTable from './EstudianteTable';
 import URL from '../../Url';
+import Sidebar from '../components/Sidebar/Sidebar';
+import "../asistencia.scss"
 
 const EstudianteApp = () => {
   const [estudiantes, setEstudiantes] = useState([]);
@@ -99,8 +101,11 @@ const EstudianteApp = () => {
   };
 
   return (
-    <div>
-      {estudianteEdit ? (
+    <div className="asistencia-container" >
+      <Sidebar></Sidebar>
+      <div style={{alignItems: "center"}}>
+        <div style={{paddingLeft: "20%"}}>
+        {estudianteEdit ? (
         <EstudianteForm
           estudiante={estudianteEdit}
           onSave={actualizarEstudiante}
@@ -109,11 +114,14 @@ const EstudianteApp = () => {
       ) : (
         <EstudianteForm onSave={guardarEstudiante} />
       )}
+        </div>
+      
       <EstudianteTable
         estudiantes={estudiantes}
         onDelete={eliminarEstudiante}
         onEdit={editarEstudiante}
       />
+      </div>
     </div>
   );
 };
