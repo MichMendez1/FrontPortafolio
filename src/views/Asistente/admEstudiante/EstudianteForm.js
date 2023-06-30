@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer, CDBSelect } from 'cdbreact';
 import { validarRut } from './rutUtils';
 
-const EstudianteForm = ({ onSave }) => {
+const EstudianteForm = ({ onSave, estudianteEdit }) => {
   const option = [
     {
       text: 'Femenino',
@@ -29,6 +29,26 @@ const EstudianteForm = ({ onSave }) => {
   const [rut, setRut] = useState('');
   const [telefono, setTelefono] = useState('');
   const [tipo, setTipo] = useState('Estudiante');
+
+  useEffect(() => {
+    if (estudianteEdit) {
+      setAlumnoID(estudianteEdit.alumnoID || '');
+      setCursoID(estudianteEdit.cursoID || '');
+      setNombres(estudianteEdit.nombres || '');
+      setApellidoPaterno(estudianteEdit.apellido_paterno || '');
+      setApellidoMaterno(estudianteEdit.apellido_materno || '');
+      setFechaNacimiento(estudianteEdit.fecha_nacimiento || '');
+      setNacionalidad(estudianteEdit.nacionalidad || '');
+      setDireccion(estudianteEdit.direccion || '');
+      setEmail(estudianteEdit.email || '');
+      setPassword(estudianteEdit.password || '');
+      setGenero(estudianteEdit.genero || '');
+      setRut(estudianteEdit.rut || '');
+      setTelefono(estudianteEdit.telefono || '');
+      setTipo(estudianteEdit.tipo || 'Estudiante');
+    }
+  }, [estudianteEdit]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +122,16 @@ const EstudianteForm = ({ onSave }) => {
         tipo,
       };
 
-      onSave(estudiante);
+      
+      if (estudianteEdit && estudianteEdit._id) {
+        // Actualizar estudiante existente
+        estudiante._id = estudianteEdit._id;
+        onSave(estudiante);
+      } else {
+        // Guardar nuevo estudiante
+        onSave(estudiante);
+      }
+
       // Mostrar mensaje de éxito o redireccionar
       alert('Estudiante registrado exitosamente');
     }
