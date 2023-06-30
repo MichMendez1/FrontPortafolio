@@ -1,19 +1,15 @@
 import "./perfil.scss"
+import "./asistencia.scss"
 import Sidebar from '../components/sidebar/Sidebar'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
 const PerfilEst = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
-  const { nombres, apellido_paterno, apellido_materno, email, direccion,telefono, tipo,genero, cursoID } = user || {}
+  const { nombres, apellido_paterno, apellido_materno, email, direccion, telefono, tipo, genero, cursoID } = user || {}
   return (
-    <div>
-      
-      
-      <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
-      <MDBRow className="justify-content-center align-items-center h-100">
-      <Sidebar/>
-      </MDBRow>
-      <MDBContainer className="py-5 h-100">
+    <div className="asistencia-container" >
+      <Sidebar />
+      <div className="container" >
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="6" className="mb-4 mb-lg-0">
             <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
@@ -28,7 +24,7 @@ const PerfilEst = () => {
                 </MDBCol>
                 <MDBCol md="8">
                   <MDBCardBody className="p-4">
-                  <MDBTypography tag="h6">Información personal</MDBTypography>
+                    <MDBTypography tag="h6">Información personal</MDBTypography>
                     <hr className="mt-0 mb-4" />
                     <MDBRow className="pt-1">
                       <MDBCol size="6" className="mb-3">
@@ -52,9 +48,6 @@ const PerfilEst = () => {
                         <MDBCardText className="text-muted">{telefono}</MDBCardText>
                       </MDBCol>
                     </MDBRow>
-
-                    
-
                     <div className="d-flex justify-content-start">
                       <a href="#!"><MDBIcon fab icon="facebook me-3" size="lg" /></a>
                       <a href="#!"><MDBIcon fab icon="twitter me-3" size="lg" /></a>
@@ -66,8 +59,7 @@ const PerfilEst = () => {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-      </MDBContainer>
-    </section>
+      </div>
     </div>
   )
 }
