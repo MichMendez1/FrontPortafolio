@@ -7,8 +7,6 @@ const PerfilEst = () => {
   const { nombres, apellido_paterno, apellido_materno, email, direccion,telefono, tipo,genero, cursoID } = user || {}
   return (
     <div>
-      
-      
       <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
       <MDBRow className="justify-content-center align-items-center h-100">
       <Sidebar/>

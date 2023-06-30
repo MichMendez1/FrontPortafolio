@@ -10,6 +10,8 @@ import {
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import URL from '../Url'
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +25,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/estudiantes/login",
+        URL+"/api/estudiantes/login",
         {
           method: "POST",
           headers: {

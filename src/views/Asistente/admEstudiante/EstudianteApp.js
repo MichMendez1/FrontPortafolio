@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EstudianteForm from './EstudianteForm';
 import EstudianteTable from './EstudianteTable';
+import URL from '../../Url';
 
 const EstudianteApp = () => {
   const [estudiantes, setEstudiantes] = useState([]);
@@ -12,7 +13,7 @@ const EstudianteApp = () => {
 
   const obtenerEstudiantes = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/estudiantes/usuarios');
+      const response = await fetch( URL+'/api/estudiantes/usuarios');
       if (response.ok) {
         const data = await response.json();
         setEstudiantes(data);
@@ -26,7 +27,7 @@ const EstudianteApp = () => {
 
   const guardarEstudiante = async (estudiante) => {
     try {
-      const response = await fetch('http://localhost:4000/api/estudiantes', {
+      const response = await fetch( URL+'/api/estudiantes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ const EstudianteApp = () => {
 
   const eliminarEstudiante = async (estudianteId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/estudiantes/eliminar/${estudianteId}`, {
+      const response = await fetch( URL+ `/api/estudiantes/eliminar/${estudianteId}`, {
         method: 'DELETE',
       });
 
@@ -71,7 +72,7 @@ const EstudianteApp = () => {
 
   const actualizarEstudiante = async (estudiante) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/estudiantes/editar/${estudiante._id}`, {
+      const response = await fetch( URL+ `/api/estudiantes/editar/${estudiante._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
