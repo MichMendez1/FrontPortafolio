@@ -17,11 +17,11 @@ select {
 }
 
 .select-curso {
-	width: 400px;
+	width: 200px;
 }
 
 .select-alumno {
-	width: 600px;
+	width: 400px;
 }
 
 select:hover {

@@ -1,33 +1,27 @@
 import "./tabla.css"
-const cl = console.log
-
-function handleSubmit(event) {
-	event.preventDefault()
-	const datos = new FormData(event.target)
-	console.log(datos)
-}
-
 
  /* tabla para ver la asistencia o notas del curso  */
-function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
+function tablaCurso(listaAlumnos, tipoTabla, setAsistenciaNota, handleSubmitAnotAsistencia){
 	const inputAsistencia = (alumnoId) => {
+		setAsistenciaNota(true)
 		return <>
 			<div className="caja-input">
-				<label><input type="radio" name={alumnoId} value="presente" /> Presente </label>
+				<label><input type="radio" name={alumnoId} value="presente" required/> Presente </label>
 			</div>
 			<div className="caja-input">
-				<label><input type="radio" name={alumnoId} value="ausente" /> Ausente </label>
+				<label><input type="radio" name={alumnoId} value="ausente" required/> Ausente </label>
 			</div>
 			<div className="caja-input">
-				<label><input type="radio" name={alumnoId} value="justificado" /> Justificado </label>
+				<label><input type="radio" name={alumnoId} value="justificado" required/> Justificado </label>
 			</div>
 		</>
 	}
-	const inputNotas = (alumnoId) => {
+	const inputNotas = (alumno) => {
+		setAsistenciaNota(false)
 		return <>
-			<label><input className="input-nota" type="number" name={alumnoId} /> Nota 1 </label>
-			<label><input className="input-nota" type="number" name={alumnoId} /> Nota 2 </label>
-			<label><input className="input-nota" type="number" name={alumnoId} /> Nota 3 </label>
+			<label><input className="input-nota" type="number" name={alumno._id} min="1" max="7" step="0.1" placeholder={alumno.nota_1} nota={1}/> Nota 1 </label>
+			<label><input className="input-nota" type="number" name={alumno._id} min="1" max="7" step="0.1" placeholder={alumno.nota_2} nota={2}/> Nota 2 </label>
+			<label><input className="input-nota" type="number" name={alumno._id} min="1" max="7" step="0.1" placeholder={alumno.nota_3} nota={3}/> Nota 3 </label>
 		</>
 	}
 
@@ -41,7 +35,7 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 					{listaAlumnos.map(alumno =>
 						<div
 							className="celda-contenido"
-							key={alumno.id}
+							key={alumno._id}
 						>
 							{alumno.nombres}
 						</div>)}
@@ -51,14 +45,14 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 					{listaAlumnos.map(alumno =>
 						<div
 							className="celda-contenido"
-							key={alumno.id}  
+							key={alumno._id}  
 						>
 							{alumno.apellido_paterno+' '+alumno.apellido_materno}
 						</div>)}
 				</div>
 
 				<form
-					onSubmit={handleSubmit}
+					onSubmit={handleSubmitAnotAsistencia}
 					id="formTabla"
 					className="columna"
 				>
@@ -71,21 +65,21 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 							className="celda-contenido celda-form"
 						>
 							{(tipoTabla === 'asistencia') 
-								? inputAsistencia(alumno.id) 
-								: inputNotas(alumno.id)
+								? inputAsistencia(alumno._id) 
+								: inputNotas(alumno)
 							}
-						</div>)}
+						</div>)
+					}
+
+					<div className="caja-btn-d">
+						<input 
+							className="btn-d btn-tabla" 
+							type="submit" 
+							form="formTabla"
+							value="Aceptar">
+						</input>
+					</div>
 				</form>
-			</div>
-					
-			<div className="caja-btn">
-				<button 
-					className="btn-d btn-tabla" 
-					type="submit" 
-					form="formTabla"
-					onClick={() => setModal(!modal)}>
-						Aceptar
-				</button>
 			</div>		
 		</div>
 	</>
@@ -93,7 +87,7 @@ function tablaCurso(listaAlumnos, tipoTabla, setModal, modal){
 
 
  /* tabla para ver las  anotaciones de un alumno*/
-function tablaAlumno(listaAnotaciones){
+function tablaAlumno(listaAnotaciones, borraAnotacion){
 	let contador = 0
 
 	return (!listaAnotaciones) 
@@ -116,10 +110,18 @@ function tablaAlumno(listaAnotaciones){
 					<div className="celda-titulo">Anotaciones</div>
 					{listaAnotaciones.map(anotacion =>
 						<div
-							key={anotacion.id}
-							className="celda-contenido"
+							key={anotacion._id}
+							className="celda-contenido celda-anotaciones"
 						>
-							<p>{anotacion.texto}</p>
+							<div className="caja-anotacion">
+								{anotacion.anotacion}
+							</div>
+							<button 
+								className="btn-d btn-eliminar-d" 
+								value={anotacion._id}
+								onClick={borraAnotacion}>
+									Borrar
+							</button>
 						</div>
 					)}
 				</div>	
@@ -131,15 +133,15 @@ function tablaAlumno(listaAnotaciones){
 
 
 /* funcion principal */
-function Tabla({listaAlumnos, listaAnotaciones, tipoTabla, modal, setModal, useTabla, mostrarTabla}) {
-	// if (!mostrarTabla){
-	// 	return <span>Lista....</span>
-	// }else {
+function Tabla({listaAlumnos, listaAnotaciones, tipoTabla, useTabla, mostrarTabla, borraAnotacion, setAsistenciaNota, handleSubmitAnotAsistencia}) {
+	if (!mostrarTabla){
+		return <span>Lista....</span>
+	}else {
 		return (useTabla)
-			? tablaCurso(listaAlumnos, tipoTabla, setModal, modal)
-			: tablaAlumno(listaAnotaciones)
+			? tablaCurso(listaAlumnos, tipoTabla, setAsistenciaNota, handleSubmitAnotAsistencia)
+			: tablaAlumno(listaAnotaciones, borraAnotacion)
 	} 
-// }
+}
 
 export default Tabla
 
