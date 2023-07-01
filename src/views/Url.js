@@ -1,6 +1,6 @@
-const URL = 'http://localhost:4000';
+//const URL = 'http://localhost:4000';
 
-// export const URL = 'URL AZURE CUANDO ESTE';
+const URL = 'https://backportafolio.azurewebsites.net';
 
 
 export default URL;

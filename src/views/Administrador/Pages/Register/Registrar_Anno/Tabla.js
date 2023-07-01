@@ -8,37 +8,32 @@ import {
   CDBContainer,
 } from "cdbreact";
 
-const EstudianteTable = ({ estudiantes, onDelete, onEdit }) => {
+const Tabla = ({ annos, onDelete, onEdit }) => {
   return (
     <CDBContainer>
       
       <CDBTable responsive>
         <CDBTableHeader>
           <tr>
-            <th>Nombres</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Email</th>
+            <th>ID Año</th>
+            <th>Año</th>
+ 
             <th>Acciones</th>
           </tr>
         </CDBTableHeader>
         <CDBTableBody>
-          {estudiantes.map((estudiante) => (
-            <tr key={estudiante._id}>
-              <td>{estudiante.nombres}</td>
-              <td>{estudiante.apellido_paterno}</td>
-              <td>{estudiante.apellido_materno}</td>
-              <td>{estudiante.fecha_nacimiento}</td>
-              <td>{estudiante.email}</td>
+          {annos.map((anno) => (
+            <tr key={anno._id}>
+              <td>{anno}</td>
+
               <td>
                 <CDBBtnGrp size="sm">
-                  <CDBBtn color="light" onClick={() => onEdit(estudiante)}>
+                  <CDBBtn color="light" onClick={() => onEdit(anno)}>
                     Editar
                   </CDBBtn>
                   <CDBBtn
                     color="warning"
-                    onClick={() => onDelete(estudiante._id)}
+                    onClick={() => onDelete(anno._id)}
                   >
                     Eliminar
                   </CDBBtn>
@@ -52,4 +47,4 @@ const EstudianteTable = ({ estudiantes, onDelete, onEdit }) => {
   );
 };
 
-export default EstudianteTable;
+export default Tabla;

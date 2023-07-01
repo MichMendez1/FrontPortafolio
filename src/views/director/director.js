@@ -14,7 +14,7 @@ const Director = () => {
     const [vista, setVista] = useState(0);
     const [selectCurso, setSelectcurso] = useState(0);
     const [selectAlumno, setSelectAlumno] = useState(0);
-
+    const [estadoInput,setEstadoInput] = useState('Disable')
     const [cursos, setCursos] = useState([
         {
             nombre: '1-A',
@@ -39,12 +39,16 @@ const Director = () => {
                 nombre: 'Esteban',
                 promedioGeneral: 5.4,
                 apoderado: 'Antonio',
+                apellido_materno:'Silva',
+                apellido_paterno:'Torres',
                 correo: 'esteban@colegionh.cl',
                 idCurso:1
             },
             {
                 id:2,
                 nombre: 'Andres',
+                apellido_materno:'Silva',
+                apellido_paterno:'Torres',
                 promedioGeneral: 4.0,
                 apoderado: 'Roberto',
                 correo: 'andres@colegionh.cl',
@@ -53,6 +57,8 @@ const Director = () => {
             {
                 id:3,
                 nombre: 'Eduardo',
+                apellido_materno:'Silva',
+                apellido_paterno:'Torres',
                 promedioGeneral: 6.0,
                 apoderado: 'alejandro',
                 correo: 'Eduardo@colegionh.cl',
@@ -128,6 +134,7 @@ const Director = () => {
         setSelectAlumno(numAlumno);
         setVista(numVista);
     }
+
 
 
 
@@ -253,7 +260,15 @@ const Director = () => {
                         <div class="card" style={{width:'100%'}}>
                             <img src={Personas} style={{width:'10%',alignSelf:'center'}} class="card-img-top" alt="..."/>
                             <div class="card-body">
-                                <h5 class="card-title">{alumnos[selectAlumno-1].nombre}</h5>
+                                <div className="form-group">
+                                <label>Nombre</label>
+                                <input value={alumnos[selectAlumno-1].nombre}/>
+                                <label>Apellido Paterno</label>
+                                <input value={alumnos[selectAlumno-1].apellido_paterno} />
+                                <label>Apellido Materno</label>
+                                <input value={alumnos[selectAlumno-1].apellido_materno} />
+                                </div>
+                                
                             </div>
                             <ul class="list-group list-group-flush">
                                 <h6 style={{marginLeft:'1%'}} class="card-title">Datos Personales</h6>

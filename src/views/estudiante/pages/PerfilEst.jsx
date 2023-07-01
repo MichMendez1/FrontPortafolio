@@ -1,4 +1,3 @@
-import "./perfil.scss"
 import "./asistencia.scss"
 import Sidebar from '../components/sidebar/Sidebar'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
@@ -16,11 +15,11 @@ const PerfilEst = () => {
               <MDBRow className="g-0">
                 <MDBCol md="4" className="gradient-custom text-center text-white"
                   style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
-                  <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  <MDBCardImage src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                     alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
-                  <MDBTypography tag="h5">{nombres} {apellido_paterno} {apellido_materno}</MDBTypography>
-                  <MDBCardText>{tipo}</MDBCardText>
-                  <MDBIcon far icon="edit mb-5" />
+                  <MDBTypography tag="h5" color="black">{nombres} {apellido_paterno} {apellido_materno}</MDBTypography>
+                  <MDBTypography tag="h6" color="primary">{tipo}</MDBTypography>
+                 
                 </MDBCol>
                 <MDBCol md="8">
                   <MDBCardBody className="p-4">
@@ -32,7 +31,7 @@ const PerfilEst = () => {
                         <MDBCardText className="text-muted">{genero}</MDBCardText>
                       </MDBCol>
                       <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Codigo de Curso</MDBTypography>
+                        <MDBTypography tag="h6">Código de Curso</MDBTypography>
                         <MDBCardText className="text-muted">{cursoID}</MDBCardText>
                       </MDBCol>
                     </MDBRow>
@@ -48,11 +47,6 @@ const PerfilEst = () => {
                         <MDBCardText className="text-muted">{telefono}</MDBCardText>
                       </MDBCol>
                     </MDBRow>
-                    <div className="d-flex justify-content-start">
-                      <a href="#!"><MDBIcon fab icon="facebook me-3" size="lg" /></a>
-                      <a href="#!"><MDBIcon fab icon="twitter me-3" size="lg" /></a>
-                      <a href="#!"><MDBIcon fab icon="instagram me-3" size="lg" /></a>
-                    </div>
                   </MDBCardBody>
                 </MDBCol>
               </MDBRow>
