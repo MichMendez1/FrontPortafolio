@@ -280,7 +280,7 @@ const EstudianteForm = ({ estudianteEdit, onSave  }) => {
               style={{ width: '40%' }}
               className="btn-block mt-5 mx-auto"
             >
-              Register
+              Registrar
             </CDBBtn>
           </form>
         </CDBCardBody>

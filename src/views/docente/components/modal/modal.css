@@ -1,8 +1,8 @@
-.ocultar-modal {
+/* .ocultar-modal {
 	visibility: hidden;
-}
+} */
 
-.modal {
+.modal-d {
 	width: 350px;
 	height: 150px;
 	display: flex;
@@ -21,6 +21,6 @@
 	box-shadow: 0 0 0 100vmax #26262682;
 }
 
-.modal:hover{
+.modal-d:hover{
 	border: 3px solid #47ae6a;
 }

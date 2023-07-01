@@ -3,11 +3,12 @@ import EstudianteForm from './EstudianteForm';
 import EstudianteTable from './EstudianteTable';
 import URL from '../../Url';
 import { react } from '@babel/types';
+import Sidebar from '../components/Sidebar/Sidebar';
+import "../asistencia.scss"
 
 const EstudianteApp = () => {
   const [estudiantes, setEstudiantes] = useState([]);
   const [estudianteEdit, setEstudianteEdit] = useState(null);
-  const [vista,setVista]=useState(0)
 
   useEffect(() => {
     obtenerEstudiantes();
@@ -68,7 +69,7 @@ const EstudianteApp = () => {
     
     setEstudianteEdit(estudiante);
     console.log(estudiante);
-    setVista(1)
+
   };
 
   const cancelarEdicion = () => {
@@ -103,37 +104,28 @@ const EstudianteApp = () => {
     }
   };
 
-  const Render0 =()=>{
-    if(vista == 1){
-      return(
-      <div>
-      {(
+  return (
+    <div className="asistencia-container" >
+      <Sidebar></Sidebar>
+      <div style={{alignItems: "center"}}>
+        <div style={{paddingLeft: "20%"}}>
+        {estudianteEdit ? (
         <EstudianteForm
-          estudianteEdit={estudianteEdit}
+          estudiante={estudianteEdit}
           onSave={actualizarEstudiante}
           onCancel={cancelarEdicion}
         />
+      ) : (
+        <EstudianteForm onSave={guardarEstudiante} />
       )}
+        </div>
       
-    </div>)
-    }
-    else{
-      return(
-        <div>
-          <button className='btn btn-primary' onClick={()=>setVista(1)} >Registar</button>
-          <EstudianteTable
+      <EstudianteTable
         estudiantes={estudiantes}
         onDelete={eliminarEstudiante}
         onEdit={editarEstudiante}
       />
-        </div>
-      )
-    }
-  }
-
-  return (
-    <div>
-      <Render0></Render0>
+      </div>
     </div>
   );
 };

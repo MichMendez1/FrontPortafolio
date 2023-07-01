@@ -1,22 +1,20 @@
 import "./crearAnotacion.css"
 
-function CrearAnotacion ({useCrearAnotacion, modal, setModal}){
-    const handleSubmit = event => {
-        event.preventDefault()
-        setModal(!modal)
-    }
+function CrearAnotacion ({useCrearAnotacion, handleSubmitAnotaciones, handleChangeAnotaciones}){
+    
     return (
         useCrearAnotacion && <>
-        <form id="crear-anotacion">
+        <form id="crear-anotacion" onSubmit={handleSubmitAnotaciones}>
             <textarea className="textAnotacion" 
                     name="anotacion"
-                    id="anotacion"
+                    id="anotacion-textArea"
                     placeholder="Redactar anotacion alumno" 
-                    spellcheck="false">
+                    spellcheck="false"
+                    onChange={handleChangeAnotaciones}>
             </textarea>
 
             <div className="caja-btn">    
-                <button className="btn btn-crear" onClick={handleSubmit}>
+                <button type="submit" className="btn-d btn-anotacion-d">
                     Crear
                 </button>
             </div>    

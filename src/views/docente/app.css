@@ -3,40 +3,43 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-body{
-	background-color: #F2F2F2;
-}
 
 html {
 	font-size: 20px;
+	background-color: #f5f4f4;
 }
 
-.cabezera {
-	height: 5.5rem;
-	background-color: #213c4e;
+body {
+	background-color: #f5f4f4;
+}
+
+.pagina-asistencia{
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0.5rem 2.5rem;
+	height: 100vh;
+	width: 100%;
+	background-color: #f5f4f4;
 }
 
-.img-cabezera{
-	max-width: auto;
-	height: 100%
+
+.contenido {
+	background-color: #f5f4f4;
+	width: 100%;
 }
 
-.nombre-docente {
-	color: #213c4e;
-	margin: 1rem;
-	margin-left: 1.5rem;
-	font-size: 1.3rem;
+.icon {
+	font-size: 25px;
+	color: #012c56;
 }
 
 .caja-componente {
-	padding: 1.5rem 4rem;
+	padding: 0.3rem 4rem;
 }
 
-.btn,
+.superior{
+	margin-top: 0.8rem;
+}
+
+.btn-d,
 select, textarea {
 	padding: .5rem;
 	background-color: #ffffff;
@@ -48,26 +51,53 @@ select, textarea {
 
 .enlaces {
 	display: flex;
-	gap: 1rem;
-}
-
-.btn-cabezara {
-	border: none;
-	color: #f2f2f2;
-	background-color: transparent;
+	flex-direction: column;
+	margin-top: 2rem;
 }
 
 .btn-cabezara:hover {
-	color: #45b0e5;
+	background-color: #ece8ff;
 }
 
-.btn:hover {
+.btn-cabezara {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0.4rem;
+	border: none;
+	color: #012c56;
+	background-color: transparent;
+	padding: 1rem 0;
+	padding-left: 0.3rem;
+}
+
+.btn-d:hover {
 	background-color: #45b0e5;
 	box-shadow: 1px 5px 10px 2px #00000033;
 	border: 1px solid #a6bff0;
 }
 
-.btn:active {
+.btn-d:active {
 	background-color: #F2B749;
 	color: #F2F2F2;
+}
+
+.btn-eliminar-d{
+	color: #ce1212;
+}
+
+.btn-eliminar-d:hover{
+	background-color: #ce1212;
+	color: #f2f2f2;
+}
+
+.btn-eliminar-d:active {
+	background-color: #F2B749;
+	color: #F2F2F2;
+}
+
+.caja-btn-especial{
+	position: absolute;
+	right: 4rem;
+	bottom: 2rem;
 }
