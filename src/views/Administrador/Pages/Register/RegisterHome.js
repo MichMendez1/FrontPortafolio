@@ -8,7 +8,7 @@ import Tables from '../../components/Tables/Tables';
 import Spiner from "../../components/Spiner/Spiner";
 import { useNavigate } from 'react-router-dom';
 import "./home.css";
-import Headers from '../../components/Headers/Headers';
+
 
 
 function RegisterHome() {

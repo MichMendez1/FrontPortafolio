@@ -1,7 +1,6 @@
 import "./buscador.css"
 import { useState } from "react"
 
-const cl = console.log
 
 /* cuando se quiere pasar asistencia o colocar notas */
 function formCurso(buscarCurso, cursos){
@@ -24,16 +23,16 @@ function formCurso(buscarCurso, cursos){
                     {cursos.map(curso => {
                         return(
                             <option
-                            key={curso.id}
-                            value={curso.nombre}
+                            key={curso}
+                            value={curso}
                             >
-                                {curso.nombre}
+                                {curso.replace('_', ' ').toUpperCase()}
                             </option>
                         )
                     })}
             </select>
 
-            <button className="btn btn-buscar" type="submit">Buscar</button>
+            <button className="btn-d btn-buscar" type="submit">Buscar</button>
         </form>
     </>
 }
@@ -44,7 +43,7 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
 
     const handleChange = (event) => {
         let eleccion = event.target.value
-        const curso = alumnos.filter(alumno => alumno.curso === eleccion)
+        const curso = alumnos.filter(alumno => alumno.cursoID === eleccion)
         if (curso.length === 0) return false
         setListaAlumno(curso)
     }
@@ -70,10 +69,10 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
                     {cursos.map(curso => {
                         return(
                             <option
-                            key={curso.id}
-                            value={curso.nombre}
+                            key={curso}
+                            value={curso}
                             >
-                                {curso.nombre}
+                                {curso.replace('_', ' ').toUpperCase()}
                             </option>
                         )
                     })}
@@ -96,17 +95,17 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
                           listaAlumnos.map(alumno => {
                             return(
                                 <option
-                                key={alumno.id}
-                                value={alumno.id}
+                                key={alumno.nombres+' '+alumno.apellido_paterno+' '+alumno.apellido_materno}
+                                value={alumno._id}
+                                // value={alumno.nombres+' '+alumno.apellido_paterno+' '+alumno.apellido_materno}
                                 >
-                                    {alumno.nombre}
+                                    {alumno.nombres+' '+alumno.apellido_paterno+' '+alumno.apellido_materno}
                                 </option>
                             )
                         })}
             </select>
             
-            
-            <button className="btn" type="submit">Buscar</button>
+            <button className="btn-d" type="submit">Buscar</button>
         </form>
     </>
 }
@@ -115,28 +114,10 @@ function formCursoAlumno(buscarAnotaciones, cursos, alumnos, listaAlumnos, setLi
 
 
 /* funcion principal */
-function Buscador ({alumnos, cursos, anotaciones, setAnotaciones, setAlumnos, useBuscador, setCrearAnotaciones}){
+function Buscador ({alumnos, cursos, useBuscador, buscarCurso, buscarAnotaciones}){
     const [listaAlumnos, setListaAlumno] = useState(null)
 
-    const buscarCurso = (event) => {
-        event.preventDefault()
-        const datos = new FormData(event.target)
-        const eleccion = datos.get('seleccionCurso')
-        const curso = alumnos.filter(alumno => alumno.curso === eleccion)
-        if (curso.length === 0) return false
-        setAlumnos(curso)
-    }
-
-    const buscarAnotaciones = (event) => {
-        // console.log('ha')
-        event.preventDefault()
-        const datos = new FormData(event.target)
-        const eleccion = parseInt(datos.get('seleccionAlumno')) 
-        const textos = anotaciones.filter(anotacion => anotacion.id_alumno === eleccion)
-        if (textos.length === 0) return false   
-        setAnotaciones(textos)  
-        setCrearAnotaciones(true)   
-    }
+    if(!cursos) return <div>Buscador....</div>
 
     return (useBuscador)
         ? formCurso(buscarCurso, cursos)

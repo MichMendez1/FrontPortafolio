@@ -17,6 +17,18 @@
 	background-color: aqua;
 }
 
+.celda-anotaciones{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.caja-anotacion{
+	width: 92%;
+	overflow: auto;
+}
+
 .columna{
 	display: flex;
 	flex-direction: column;
@@ -38,7 +50,7 @@
 }
 
 .columnaAnotaciones{
-	/* width: 20%; */
+	width: 98%;
 }
 
 .celda-form{
@@ -52,15 +64,18 @@
 label{
 	display: inline-block;
 	margin: 0 0.8rem;
-
 }
 
 .input-nota{
 	width: 2.5rem;
 }
 
-.caja-btn{
+.caja-btn-d{
+	position: absolute;
 	display: flex;
+	right: 5rem;
+	top: 3rem;
 	justify-content: center;
 	padding-top: 1.5rem;
 }
+

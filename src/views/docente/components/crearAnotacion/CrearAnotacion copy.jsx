@@ -1,7 +1,7 @@
 import "./crearAnotacion.css"
 
-function CrearAnotacion ({useCrearAnotacion, handleSubmitAnotaciones, handleChangeAnotaciones}){
-    
+function CrearAnotacion ({useCrearAnotacion, handleSubmitAnotaciones, handleChangeAnotaciones, cambiarCrearVerAnon}){
+
     return (
         useCrearAnotacion && <>
         <form id="crear-anotacion" onSubmit={handleSubmitAnotaciones}>
@@ -16,6 +16,12 @@ function CrearAnotacion ({useCrearAnotacion, handleSubmitAnotaciones, handleChan
             <div className="caja-btn">    
                 <button type="submit" className="btn-d btn-anotacion-d">
                     Crear
+                </button>
+            </div>    
+
+            <div className="caja-btn-especial">    
+                <button onClick={cambiarCrearVerAnon} className="btn-d btn-anotacion-d">
+                    Ver anotaciones
                 </button>
             </div>    
         </form>

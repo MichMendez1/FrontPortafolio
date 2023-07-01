@@ -17,14 +17,28 @@ import Docente from './views/docente/app';
 import Administrador from './views/Administrador/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Homeadmin from './views/Administrador/Pages/HomeAD/Homeadmin';
-import RegisterHome from './views/Administrador/Pages/Register/RegisterWorker';
+import RegisterHome from './views/Administrador/Pages/Register/RegistrarTrabajador';
 import RegisterSchool from './views/Administrador/Pages/Register/RegisterSchool';
 import RegisterAssistant from './views/Administrador/Pages/Register/RegisterAssistant';
-import RegisterWorker from './views/Administrador/Pages/Register/RegisterWorker';
-import Headers from './views/Administrador/components/Headers/Headers';
+import RegistrarTrabajador from './views/Administrador/Pages/Register/RegistrarTrabajador';
 import Profile from './views/Administrador/Pages/Profile/Profile';
 import EditWorker from './views/Administrador/Pages/Edit/EditWorker';
 import RegisterTeacher from './views/Administrador/Pages/Register/RegisterTeacher';
+import Register from './views/Administrador/Pages/Register/Register';
+import RegistrarColegio from './views/Administrador/Pages/Register/RegistrarColegio';
+import EditarColegio from './views/Administrador/Pages/Edit/EditarColegio';
+import Colegio from './views/Administrador/Pages/HomeAD/Colegio';
+import PerfilAdm from './views/Administrador/Pages/Perfil/PerfilAdm';
+import RegistrarFecha from './views/Administrador/Pages/HomeAD/RegistrarFecha';
+import RegistrarDia from './views/Administrador/Pages/Register/Registrar_Dia/RegistrarDia';
+import RegistrarAnno from './views/Administrador/Pages/Register/RegistrarAnno';
+import RegistrarAsignatura from './views/Administrador/Pages/Register/RegistrarAsignatura';
+import RegistrarTrabajo from './views/Administrador/Pages/Register/RegistrarTrabajo';
+import RegistrarSala from './views/Administrador/Pages/Register/RegistrarSala';
+import RegistrarPersonal from './views/Administrador/Pages/HomeAD/RegistrarPersonal';
+import RegistrarHorario from './views/Administrador/Pages/HomeAD/RegistrarHorario';
+import RegistrarSostenedor from './views/Administrador/Pages/Register/RegistrarSostenedor';
+
 import RegistroEstudiante from './views/Registro/RegistroEstudiante';
 import AdminPage from './views/Asistente/AsistenteHome';
 import AboutPage from './views/About/sobreNosotros';
@@ -42,6 +56,8 @@ import ProfesorApp from './views/Asistente/admProfesor/ProfesorApp';
 import PerfilAsist from './views/Asistente/PerfilASIST';
 
 
+
+
 const user = JSON.parse(sessionStorage.getItem('user'));
 const { tipo} = user || {};
 
@@ -50,24 +66,37 @@ const AppWithSidebar = () => (
 
 
   <div>
-     {/* {isLoggedIn ? <Navbar /> : <NavNolog />}   */}
+    {/* {isLoggedIn ? <Navbar /> : <NavNolog />}   */}
 
     <Routes>
 
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<Login/>} />
+      <Route path="/login" element={<Login />} />
       {user && user.Role === 'Admin' && (
         <Route path="/registro" element={<RegistrationPage />} />
+<<<<<<< HEAD
       )}
  
 
+=======
+        )}
+
+      {/*{user && user.Role === 'Admin' && (*/}
+      <Route path="/asistenteadm" element={<UserPage />} />
+      {/* )}*/}
+>>>>>>> DiegoBustamante
 
       <Route path="/home" element={<HomePage />} />
       <Route path="/docente" element={<Docente />} />
       <Route path="/homeAsistente" element={<AdminPage />} />
       <Route path="/registro" element={<RegistroEstudiante />} />
+<<<<<<< HEAD
       <Route path="/admEstudiantes" element={<EstudianteApp />}/>
       <Route path="/perfilasistente" element={<PerfilAsist/>}/>
+=======
+      <Route path="/admEstudiantes" element={<EstudianteApp />} />
+      <Route path="/perfil" element={<Perfil />} />
+>>>>>>> DiegoBustamante
       <Route path="/docente" element={<Docente />} />
       <Route path="/nosotros" element={<AboutPage />} />
       <Route path="/Equipo" element={<ProfesoresPage />} />
@@ -78,21 +107,40 @@ const AppWithSidebar = () => (
         <Route index element={<Estudiante />} />
         <Route path='/estudiante/asistencia' element={<Asistencia />} />
         <Route path='/estudiante/notas' element={<Notas />} />
-        <Route path='/estudiante/perfil' element={<PerfilEst />} />  
+        <Route path='/estudiante/perfil' element={<PerfilEst />} />
       </Route>
 
       <Route path="/administrador" element={<Administrador />} />
       <Route path="/homeadmin" element={<Homeadmin />} />
       <Route path="/registerhome" element={<RegisterHome />} />
-      <Route path="/registerworker" element={<RegisterWorker />} />
+      <Route path="/registrartrabajador" element={<RegistrarTrabajador />} />
       <Route path="/registerassistant" element={<RegisterAssistant />} />
       <Route path="/registerschool" element={<RegisterSchool />} />
+      <Route path="/registrocolegio" element={<RegistrarColegio />} />
+      <Route path="/editarcolegio:/id" element={<EditarColegio />} />
+      <Route path="/colegio" element={<Colegio />} />
+      <Route path="/perfiladm" element={<PerfilAdm />} />
+      <Route path="/registrarfecha" element={<RegistrarFecha />} />
+      <Route path="/registrardia" element={<RegistrarDia />} />
+      <Route path="/registraranno" element={<RegistrarAnno />} />
+
+
+      <Route path="/registrarasignatura" element={<RegistrarAsignatura />} />
+      <Route path="/registrartrabajo" element={<RegistrarTrabajo />} />
+      <Route path="/registrarsala" element={<RegistrarSala />} />
+      {/*   <Route path="/registrardirector" element={<RegistrarDirector />} /> */}
+      <Route path="/registrarsostenedor" element={<RegistrarSostenedor />} />
+      <Route path="/registrarpersonal" element={<RegistrarPersonal />} />
+      <Route path="/registrarcolegio" element={<RegistrarColegio />} />
+      <Route path="/registrarhorario" element={<RegistrarHorario />} />
+
       <Route path="/registerteacher" element={<RegisterTeacher />} />
       <Route path="/editworker" element={<EditWorker />} />
-      <Route path="/headers" element={<Headers />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/userprofile/:id" element={<Profile />} />
       {/*     <Route path="/edit/:id" element={<Edit />} />
        */}
+      <Route path='/poc' element={<Poc />} />
 
       <Route path='/director' element={<Director />} />
       <Route path='/poc' element={<Poc />} />
