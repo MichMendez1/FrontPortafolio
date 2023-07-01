@@ -7,30 +7,29 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./register.css";
 
-const RegistrarSala = () => {
-    const [Salas, setSalas] = useState({
-        id_sala: "",
-        id_colegio: "",
-        siglas_sala: "",
+const RegistrarAnno = () => {
+    const [Annos, setAnnos] = useState({
+        id_anno: "",
+        anno: "",
     });
 
     const handleInputChange = (e) => {
-        setSalas({
-            ...Salas,
+        setAnnos({
+            ...Annos,
             [e.target.name]: e.target.value
         });
-        console.log(Salas);
+        console.log(Annos);
     };
 
     const HacerFetch = async () => {
         let campoFaltante = "";
         
-        if (Salas.id_sala === "") {
-            campoFaltante = "ID Sala";
-        } else if (Salas.id_colegio === "") {
+        if (Annos.id_anno === "") {
+            campoFaltante = "ID Anno";
+        } else if (Annos.id_colegio === "") {
             campoFaltante = "ID Colegio";
-        } else if (Salas.siglas_sala === "") {
-            campoFaltante = "Sigla Sala";
+        } else if (Annos.siglas_sala === "") {
+            campoFaltante = "Sigla Anno";
         }
         
         if (campoFaltante !== "") {
@@ -39,9 +38,9 @@ const RegistrarSala = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/salas/', {
+            const response = await fetch('http://localhost:4000/api/annos/', {
                 method: 'POST',
-                body: JSON.stringify(Salas),
+                body: JSON.stringify(Annos),
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,16 +62,12 @@ const RegistrarSala = () => {
                 <Form>
                     <Row>
                         <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-                            <Form.Label>ID Sala</Form.Label>
-                            <Form.Control type="text" name='id_sala' onChange={handleInputChange} required placeholder='ID Sala' />
+                            <Form.Label>ID Año</Form.Label>
+                            <Form.Control type="text" name='id_anno' onChange={handleInputChange} required placeholder='ID Año' />
                         </Form.Group>
                         <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-                            <Form.Label>ID Colegio</Form.Label>
-                            <Form.Control type="text" name='id_colegio' onChange={handleInputChange} required placeholder='ID Colegio' />
-                        </Form.Group>
-                        <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-                            <Form.Label>Sigla Sala</Form.Label>
-                            <Form.Control type="text" name='siglas_sala' onChange={handleInputChange} required placeholder='Sigla Sala' />
+                            <Form.Label>Año</Form.Label>
+                            <Form.Control type="text" name='anno' onChange={handleInputChange} required placeholder='Año' />
                         </Form.Group>
                     </Row>
                     <Button className='btn btn-success' onClick={HacerFetch}>Crear Trabajo</Button>
@@ -83,4 +78,4 @@ const RegistrarSala = () => {
     );
 };
 
-export default RegistrarSala;
+export default RegistrarAnno;

@@ -22,7 +22,7 @@ export default function App() {
                         <p className='fw-bold mb-1'>Registrar Año</p>
                       </div>
                     </div>
-                    <MDBBtn tag='a' href='./registrarsanno'>
+                    <MDBBtn tag='a' href='./registraranno'>
                       Año
                     </MDBBtn>
                   </MDBListGroupItem>

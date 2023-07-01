@@ -22,7 +22,7 @@ export default function App() {
                         <p className='fw-bold mb-1'>Registrar Sostenedor</p>
                       </div>
                     </div>
-                    <MDBBtn tag='a' href='./registrarssostenedor'>
+                    <MDBBtn tag='a' href='./registrarsostenedor'>
                       Sostenedor
                     </MDBBtn>
                   </MDBListGroupItem>
@@ -45,7 +45,7 @@ export default function App() {
                   <MDBListGroupItem className='d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                       <div className='ms-3'>
-                        <p className='fw-bold mb-1'>Registrar Sala</p>
+                        <p className='fw-bold mb-1'>Registrar Trabajador</p>
                       </div>
                     </div>
                     <MDBBtn tag='a' href='./registrarsala'>

@@ -32,7 +32,7 @@ const SidebarAdm = () => {
             <NavLink exact to="/registrarpersonal" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="book">Registrar Personal</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/registrarcolegio" activeClassName="activeClicked">
+            <NavLink exact to="/registrarcolegios" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="book">Registrar Colegio</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/registrarHorario" activeClassName="activeClicked">

@@ -25,7 +25,7 @@ import Profile from './views/Administrador/Pages/Profile/Profile';
 import EditWorker from './views/Administrador/Pages/Edit/EditWorker';
 import RegisterTeacher from './views/Administrador/Pages/Register/RegisterTeacher';
 import Register from './views/Administrador/Pages/Register/Register';
-import RegistroColegio from './views/Administrador/Pages/Register/RegistroColegio';
+import RegistrarColegio from './views/Administrador/Pages/Register/RegistrarColegio';
 import EditarColegio from './views/Administrador/Pages/Edit/EditarColegio';
 import Colegio from './views/Administrador/Pages/HomeAD/Colegio';
 import PerfilAdm from './views/Administrador/Pages/Perfil/PerfilAdm';
@@ -36,7 +36,6 @@ import RegistrarAsignatura from './views/Administrador/Pages/Register/RegistrarA
 import RegistrarTrabajo from './views/Administrador/Pages/Register/RegistrarTrabajo';
 import RegistrarSala from './views/Administrador/Pages/Register/RegistrarSala';
 import RegistrarPersonal from './views/Administrador/Pages/HomeAD/RegistrarPersonal';
-import RegistrarColegio from './views/Administrador/Pages/HomeAD/RegistrarColegio';
 import RegistrarHorario from './views/Administrador/Pages/HomeAD/RegistrarHorario';
 import RegistrarSostenedor from './views/Administrador/Pages/Register/RegistrarSostenedor';
 
@@ -104,7 +103,7 @@ const AppWithSidebar = () => (
       <Route path="/registrartrabajador" element={<RegistrarTrabajador />} />
       <Route path="/registerassistant" element={<RegisterAssistant />} />
       <Route path="/registerschool" element={<RegisterSchool />} />
-      <Route path="/registrocolegio" element={<RegistroColegio />} />
+      <Route path="/registrocolegio" element={<RegistrarColegio />} />
       <Route path="/editarcolegio:/id" element={<EditarColegio />} />
       <Route path="/colegio" element={<Colegio />} />
       <Route path="/perfiladm" element={<PerfilAdm />} />
